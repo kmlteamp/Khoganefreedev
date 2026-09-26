@@ -1,0 +1,209 @@
+<script>
+/* =========================
+   CODE: 1 THIẾT BỊ / 1 LẦN / 48 GIỜ
+========================= */
+
+const BONUS_CODE = "BANGDEVFREE10LUOT";
+const BONUS_KEY = "BANGDEV_CODE_48H";
+
+function getVietnamNow(){
+  return new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "Asia/Ho_Chi_Minh"
+    })
+  );
+}
+
+function getBonusData(){
+  return JSON.parse(
+    localStorage.getItem(BONUS_KEY) || "null"
+  );
+}
+
+function isBonusExpired(){
+
+  const data = getBonusData();
+
+  if(!data) return true;
+
+  const now = Date.now();
+
+  return now >= data.expireAt;
+}
+
+function formatVietnamTime(timestamp){
+
+  return new Intl.DateTimeFormat("vi-VN", {
+    timeZone: "Asia/Ho_Chi_Minh",
+    year:"numeric",
+    month:"2-digit",
+    day:"2-digit",
+    hour:"2-digit",
+    minute:"2-digit",
+    second:"2-digit"
+  }).format(new Date(timestamp));
+
+}
+
+
+/* =========================
+   KIỂM TRA CODE
+========================= */
+
+document
+.getElementById("confirmCode")
+.addEventListener("click", function(){
+
+  const input =
+    document
+    .getElementById("codeInput")
+    .value
+    .trim();
+
+  if(input !== BONUS_CODE){
+
+    alert("❌ CODE KHÔNG ĐÚNG!");
+
+    return;
+  }
+
+
+  const oldData =
+    getBonusData();
+
+
+  /*
+    Nếu thiết bị đã nhập code
+    và 48 giờ chưa hết hạn
+    thì không cho nhập lại.
+  */
+
+  if(oldData && !isBonusExpired()){
+
+    alert(
+      "⚠️ THIẾT BỊ NÀY ĐÃ NHẬP CODE RỒI!\n\n" +
+      "Code chỉ được nhập 1 lần trên thiết bị.\n\n" +
+      "Hết hạn lúc:\n" +
+      formatVietnamTime(oldData.expireAt)
+    );
+
+    return;
+  }
+
+
+  /*
+    48 giờ tính từ thời điểm
+    xác nhận code thành công.
+  */
+
+  const activatedAt = Date.now();
+
+  const expireAt =
+    activatedAt + (48 * 60 * 60 * 1000);
+
+
+  localStorage.setItem(
+    BONUS_KEY,
+    JSON.stringify({
+
+      code: BONUS_CODE,
+
+      activatedAt: activatedAt,
+
+      expireAt: expireAt
+
+    })
+  );
+
+
+  /*
+    Cộng 10 lượt đăng game
+  */
+
+  let limit =
+    getUploadData();
+
+  limit.remaining += 10;
+
+  localStorage.setItem(
+    LIMIT_KEY,
+    JSON.stringify(limit)
+  );
+
+
+  updateRemaining();
+
+
+  document
+  .getElementById("codeInput")
+  .value = "";
+
+
+  document
+  .getElementById("codeModal")
+  .classList.remove("active");
+
+
+  alert(
+    "✅ NHẬP CODE THÀNH CÔNG!\n\n" +
+    "Bạn được thêm 10 lượt đăng game.\n\n" +
+    "Code có hiệu lực 48 giờ.\n\n" +
+    "Hết hạn lúc:\n" +
+    formatVietnamTime(expireAt)
+  );
+
+});
+
+
+/* =========================
+   HIỂN THỊ TRẠNG THÁI CODE
+========================= */
+
+function checkBonusStatus(){
+
+  const data =
+    getBonusData();
+
+  if(!data) return;
+
+
+  if(isBonusExpired()){
+
+    /*
+      Sau 48 giờ có thể nhập lại code
+      nếu muốn cho phép chu kỳ mới.
+    */
+
+    localStorage.removeItem(BONUS_KEY);
+
+    return;
+  }
+
+
+  const remaining =
+    data.expireAt - Date.now();
+
+  const hours =
+    Math.floor(
+      remaining / (1000 * 60 * 60)
+    );
+
+  const minutes =
+    Math.floor(
+      (remaining % (1000 * 60 * 60))
+      / (1000 * 60)
+    );
+
+}
+
+
+/* Kiểm tra mỗi phút */
+
+setInterval(
+  checkBonusStatus,
+  60 * 1000
+);
+
+checkBonusStatus();
+
+</script>
