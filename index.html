@@ -2,8 +2,8 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KHO GAME DEV</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>KHO GAME DEV X</title>
 
 <style>
 *{
@@ -14,91 +14,97 @@
 
 body{
   font-family:Arial,Segoe UI,sans-serif;
-  background:#081321;
   color:#fff;
   min-height:100vh;
+  background:
+    linear-gradient(rgba(5,10,20,.35),rgba(5,10,20,.45)),
+    url("https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/483329cdb/anh-mo-ta.png")
+    center/cover fixed no-repeat;
+  transition:background .4s;
 }
 
-/* TOP */
+body.code-bg{
+  background:
+    linear-gradient(rgba(5,10,20,.35),rgba(5,10,20,.45)),
+    url("https://meitu.jrants.com/wp-content/uploads/2024/02/23/158157230229276.jpg")
+    center/cover fixed no-repeat;
+}
+
+/* THANH TRÊN */
 .topbar{
   position:sticky;
   top:0;
   z-index:50;
-  background:#20c96b;
-  padding:13px 15px;
+  background:#2ecc71;
+  padding:14px 20px;
   display:flex;
   align-items:center;
-  gap:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  gap:14px;
+  box-shadow:0 4px 20px rgba(46,204,113,.35);
 }
 
 .logo{
-  font-size:19px;
+  font-size:21px;
   font-weight:900;
   white-space:nowrap;
 }
 
 .search-box{
   flex:1;
-  position:relative;
+  max-width:650px;
 }
 
 .search-box input{
   width:100%;
-  height:43px;
+  padding:12px 16px;
   border:0;
-  outline:0;
-  border-radius:12px;
-  padding:0 15px 0 42px;
-  font-size:14px;
-}
-
-.search-box:before{
-  content:"🔍";
-  position:absolute;
-  left:14px;
-  top:50%;
-  transform:translateY(-50%);
-  z-index:2;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
 }
 
 /* MAIN */
 .main{
   max-width:1200px;
   margin:auto;
-  padding:25px 15px 80px;
+  padding:25px 18px 100px;
 }
 
 .center-zone{
   display:flex;
   flex-direction:column;
   align-items:center;
-  padding:20px 0 35px;
+  gap:12px;
+  padding:25px 0 35px;
 }
 
 .add-btn{
-  width:92px;
-  height:92px;
-  border:0;
+  width:95px;
+  height:95px;
   border-radius:50%;
-  background:linear-gradient(135deg,#2ecc71,#159957);
-  color:white;
+  border:0;
+  background:linear-gradient(135deg,#2ecc71,#27ae60);
+  color:#fff;
   font-size:48px;
   cursor:pointer;
-  box-shadow:0 10px 30px rgba(46,204,113,.4);
-}
-
-.add-btn:active{
-  transform:scale(.94);
+  box-shadow:0 10px 30px rgba(46,204,113,.5);
 }
 
 .add-label{
-  margin-top:12px;
-  color:#7ee8a9;
-  font-size:13px;
+  color:#7dd3a8;
   font-weight:bold;
 }
 
+#turnText{
+  color:#fff;
+  font-size:13px;
+  font-weight:bold;
+  background:rgba(0,0,0,.35);
+  padding:7px 12px;
+  border-radius:20px;
+}
+
+/* TIÊU ĐỀ */
 .section-title{
   font-size:19px;
   font-weight:bold;
@@ -113,19 +119,19 @@ body{
   width:5px;
   height:22px;
   background:#2ecc71;
-  border-radius:5px;
+  border-radius:4px;
 }
 
-/* GAME GRID */
+/* GAME */
 .game-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-  gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
 }
 
 .game-card{
-  background:#13263d;
-  border:1px solid #244463;
+  background:rgba(20,40,66,.96);
+  border:2px solid #1e3a5f;
   border-radius:15px;
   overflow:hidden;
   cursor:pointer;
@@ -135,13 +141,16 @@ body{
 .game-card:hover{
   transform:translateY(-5px);
   border-color:#2ecc71;
-  box-shadow:0 12px 30px rgba(46,204,113,.18);
+  box-shadow:0 15px 30px rgba(46,204,113,.25);
+}
+
+.game-card.paused{
+  opacity:.6;
 }
 
 .game-thumb{
-  height:135px;
-  background:#0b1727;
-  overflow:hidden;
+  height:150px;
+  background:#081321;
   position:relative;
 }
 
@@ -153,61 +162,44 @@ body{
 }
 
 .game-info{
-  padding:12px;
+  padding:13px;
 }
 
 .game-name{
-  font-size:16px;
   font-weight:bold;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  margin-bottom:5px;
 }
 
-.game-author{
-  margin-top:5px;
-  color:#72e09b;
-  font-size:12px;
-}
-
+.game-author,
 .game-country{
-  color:#8fa7c1;
-  font-size:11px;
-  margin-top:4px;
+  font-size:12px;
+  color:#7dd3a8;
+  margin-bottom:4px;
 }
 
 .game-desc{
-  color:#8ca6c2;
   font-size:12px;
-  margin-top:7px;
-  line-height:1.4;
+  color:#8ba4c2;
 }
 
 .game-rating{
-  margin-top:8px;
-  color:#ffd43b;
+  margin-top:7px;
   font-size:13px;
+  color:#ffd700;
 }
 
 .play-count{
-  color:#91a8bf;
-  font-size:11px;
+  font-size:12px;
+  color:#8ba4c2;
   margin-top:4px;
 }
 
-.empty-state{
-  grid-column:1/-1;
-  text-align:center;
-  padding:60px 20px;
-  color:#69839d;
-}
-
-/* FLOAT BUTTONS */
-.float-container{
+/* NÚT TRÒN */
+.float-box{
   position:fixed;
   left:15px;
-  bottom:18px;
-  z-index:200;
+  bottom:25px;
+  z-index:300;
   display:flex;
   flex-direction:column;
   gap:12px;
@@ -218,39 +210,34 @@ body{
   width:58px;
   height:58px;
   border-radius:50%;
-  border:3px solid rgba(255,255,255,.8);
-  background:#fff;
-  box-shadow:0 6px 20px rgba(0,0,0,.4);
-  cursor:grab;
+  border:3px solid white;
   overflow:hidden;
+  background:#fff;
   padding:0;
+  cursor:grab;
+  box-shadow:0 5px 20px rgba(0,0,0,.45);
+  touch-action:none;
 }
 
 .float-btn img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
-}
-
-.float-btn:active{
-  cursor:grabbing;
 }
 
 /* MODAL */
-.overlay{
+.modal-overlay{
   position:fixed;
   inset:0;
-  z-index:100;
+  z-index:500;
   background:rgba(0,0,0,.82);
-  backdrop-filter:blur(4px);
   display:none;
   align-items:center;
   justify-content:center;
   padding:15px;
 }
 
-.overlay.active{
+.modal-overlay.active{
   display:flex;
 }
 
@@ -258,35 +245,33 @@ body{
   width:100%;
   max-width:700px;
   max-height:92vh;
-  overflow-y:auto;
-  background:#13263d;
-  border:1px solid #284766;
-  border-radius:18px;
-  padding:22px;
-  box-shadow:0 25px 80px rgba(0,0,0,.7);
-}
-
-.modal-title{
-  color:#2ecc71;
-  font-size:20px;
-  font-weight:900;
+  overflow:auto;
+  background:#142842;
+  border:1px solid #1e3a5f;
+  border-radius:17px;
+  padding:23px;
 }
 
 .modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:20px;
+  position:relative;
+  min-height:45px;
 }
 
-.close{
-  width:36px;
-  height:36px;
+.modal-title{
+  font-size:21px;
+  font-weight:900;
+  color:#2ecc71;
+  margin-bottom:18px;
+}
+
+.close-btn{
+  position:absolute;
+  right:0;
+  top:-5px;
   border:0;
-  border-radius:9px;
-  background:#203a57;
+  background:none;
   color:white;
-  font-size:24px;
+  font-size:30px;
   cursor:pointer;
 }
 
@@ -296,162 +281,173 @@ body{
 
 .field label{
   display:block;
-  color:#8ca6c2;
   font-size:12px;
   font-weight:bold;
-  margin-bottom:7px;
+  color:#91aac5;
+  margin-bottom:6px;
 }
 
 .field input,
 .field textarea,
 .field select{
   width:100%;
-  border:1px solid #294966;
-  outline:0;
-  background:#081321;
-  color:#fff;
-  border-radius:10px;
   padding:12px;
-  font-size:14px;
+  border-radius:10px;
+  border:1px solid #29486c;
+  background:#091728;
+  color:white;
+  outline:none;
 }
 
 .field textarea{
-  min-height:90px;
+  min-height:100px;
   resize:vertical;
 }
 
-.code{
-  min-height:190px!important;
-  font-family:monospace!important;
-  color:#75f0a0!important;
+.code-area{
+  min-height:180px!important;
+  font-family:monospace;
+  color:#7dd3a8!important;
 }
 
-.submit{
+.submit-btn,
+.play-btn{
   width:100%;
   border:0;
   border-radius:11px;
   padding:14px;
-  background:linear-gradient(135deg,#2ecc71,#159957);
+  background:#2ecc71;
   color:white;
-  font-weight:900;
+  font-size:16px;
+  font-weight:bold;
   cursor:pointer;
-  margin-top:5px;
 }
 
-.info-box{
-  background:#0b1929;
-  border:1px solid #24415e;
-  padding:12px;
-  border-radius:11px;
+.submit-btn:hover,
+.play-btn:hover{
+  filter:brightness(1.08);
+}
+
+/* THÔNG BÁO */
+.welcome{
+  max-width:600px;
+  text-align:center;
+}
+
+.welcome h2{
+  color:#2ecc71;
   margin-bottom:15px;
-  font-size:13px;
+}
+
+.welcome p{
+  line-height:1.6;
+  color:#d7e3ef;
+}
+
+.welcome-close{
+  margin-top:20px;
+  padding:12px 25px;
+  border:0;
+  border-radius:10px;
+  background:#2ecc71;
+  color:white;
+  font-weight:bold;
+}
+
+/* HỖ TRỢ */
+.chat-box{
+  background:#091728;
+  border-radius:12px;
+  padding:15px;
+  margin-top:10px;
+}
+
+.bot{
+  background:#142842;
+  border-radius:10px;
+  padding:12px;
   line-height:1.5;
+  margin-bottom:10px;
+}
+
+.quick-btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:9px;
+  background:#2ecc71;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
 }
 
 /* PLAY */
 .play-modal{
-  max-width:1100px;
+  max-width:1050px;
   padding:0;
   overflow:hidden;
 }
 
 .play-top{
-  padding:15px;
-  background:#0b1929;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+  padding:17px;
+  background:#0d1c30;
+  position:relative;
 }
 
-.play-title{
-  font-size:18px;
-  font-weight:bold;
+.play-top .close-btn{
+  right:15px;
+  top:10px;
 }
 
-.play-author{
-  color:#70e39b;
-  font-size:12px;
-  margin-top:4px;
-}
-
-.play-area{
-  background:#000;
-  padding:12px;
-}
-
-.play-button{
+.play-frame{
   width:100%;
-  height:48px;
+  height:62vh;
   border:0;
-  border-radius:10px;
-  background:#20c96b;
-  color:#fff;
-  font-size:17px;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.game-frame{
-  width:100%;
-  height:65vh;
-  min-height:400px;
-  border:0;
-  display:none;
   background:#000;
+  display:block;
 }
 
-.rating-area{
-  padding:15px;
-  background:#13263d;
-}
-
-.rating-title{
-  font-weight:bold;
-  margin-bottom:8px;
+.play-bottom{
+  padding:18px;
 }
 
 .stars{
   display:flex;
   gap:5px;
+  margin:10px 0;
 }
 
 .star{
   border:0;
   background:none;
-  color:#53687c;
+  color:#68788c;
   font-size:30px;
   cursor:pointer;
 }
 
-.star.active{
-  color:#ffd43b;
-}
-
-.comment-box{
-  margin-top:15px;
+.star.selected{
+  color:#ffd700;
 }
 
 .comment-box textarea{
   width:100%;
-  min-height:70px;
-  border:1px solid #2b4966;
+  min-height:75px;
+  background:#091728;
+  color:white;
+  border:1px solid #29486c;
   border-radius:10px;
-  background:#081321;
-  color:#fff;
   padding:10px;
-  resize:none;
-  outline:0;
 }
 
-.comment-send{
-  width:100%;
+.comment-btn{
   margin-top:8px;
-  padding:11px;
+  padding:10px 18px;
   border:0;
-  border-radius:9px;
-  background:#2389ff;
+  border-radius:8px;
+  background:#2ecc71;
   color:white;
   font-weight:bold;
+  cursor:pointer;
 }
 
 .comments{
@@ -459,132 +455,140 @@ body{
 }
 
 .comment{
+  background:#0c1c30;
   padding:10px;
-  background:#0b1929;
   border-radius:9px;
   margin-top:8px;
-  color:#dbe8f5;
   font-size:13px;
 }
 
-/* CHAT */
-.chat-modal{
-  max-width:390px;
+.rating-info{
+  color:#ffd700;
+  margin:8px 0;
 }
 
-.chat-box{
-  background:#081321;
-  border-radius:12px;
-  padding:12px;
-  max-height:380px;
-  overflow-y:auto;
-}
-
-.bot-message,
-.user-message{
-  padding:10px 12px;
-  border-radius:12px;
-  margin-bottom:9px;
-  max-width:88%;
-  line-height:1.4;
-  font-size:13px;
-}
-
-.bot-message{
-  background:#203a57;
-}
-
-.user-message{
-  background:#159957;
-  margin-left:auto;
-}
-
-.quick{
-  width:100%;
-  padding:11px;
-  border:1px solid #2ecc71;
-  background:#102e22;
-  color:#72e09b;
-  border-radius:10px;
-  cursor:pointer;
-  margin-top:7px;
-  text-align:left;
-}
-
-/* CODE MODAL */
-.rainbow-title{
-  font-size:22px;
+/* CODE */
+.code-title{
+  text-align:center;
+  color:#2ecc71;
   font-weight:900;
-  text-align:center;
-  background:linear-gradient(90deg,#ff3b3b,#ffd43b,#2ecc71,#3498db,#a855f7);
-  -webkit-background-clip:text;
-  color:transparent;
+  font-size:20px;
+  margin-bottom:15px;
 }
 
-/* NOTICE */
+.code-note{
+  text-align:center;
+  color:#91aac5;
+  font-size:12px;
+  margin-top:10px;
+}
+
+/* ADMIN */
+.admin-game{
+  background:#091728;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.admin-actions{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+}
+
+.admin-actions button{
+  flex:1;
+  padding:9px;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.delete{
+  background:#e74c3c;
+  color:#fff;
+}
+
+.pause{
+  background:#f39c12;
+  color:#fff;
+}
+
+.resume{
+  background:#2ecc71;
+  color:#fff;
+}
+
 .notice{
-  max-width:500px;
-  text-align:center;
-}
-
-.notice-text{
-  line-height:1.7;
-  color:#dce8f5;
-  font-size:14px;
-  margin:20px 0;
+  background:#10243b;
+  border:1px solid #285071;
+  padding:10px;
+  border-radius:9px;
+  margin-bottom:12px;
+  color:#b9cee2;
 }
 
 @media(max-width:600px){
-  .logo{
-    font-size:15px;
-  }
 
-  .topbar{
-    padding:10px;
+  .logo{
+    font-size:16px;
   }
 
   .game-grid{
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:11px;
   }
 
   .game-thumb{
-    height:105px;
+    height:110px;
   }
 
-  .game-name{
-    font-size:13px;
+  .main{
+    padding-left:12px;
+    padding-right:12px;
   }
 
-  .game-desc{
-    font-size:11px;
-  }
-
-  .modal{
-    padding:16px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP -->
+<!-- THANH TRÊN -->
 <div class="topbar">
-  <div class="logo">🎮 KHO GAME</div>
+
+  <div class="logo">
+    🎮 KHO GAME DEV X
+  </div>
 
   <div class="search-box">
-    <input id="searchInput" placeholder="Tìm kiếm game...">
+    <input
+      id="searchInput"
+      placeholder="Tìm kiếm game..."
+    >
   </div>
+
 </div>
 
-<!-- MAIN -->
+
+<!-- NỘI DUNG -->
 <div class="main">
 
   <div class="center-zone">
-    <button class="add-btn" id="addBtn">+</button>
-    <div class="add-label">ĐĂNG GAME CỦA BẠN</div>
+
+    <button class="add-btn" id="addBtn">
+      +
+    </button>
+
+    <div class="add-label">
+      ĐĂNG GAME CỦA BẠN
+    </div>
+
+    <div id="turnText"></div>
+
   </div>
+
 
   <div class="section-title">
     Kho Game Cộng Đồng
@@ -594,22 +598,21 @@ body{
 
 </div>
 
-<!-- NÚT NỔI -->
-<div class="float-container" id="floatContainer">
 
-  <!-- HỖ TRỢ -->
+<!-- 2 NÚT TRÒN -->
+<div class="float-box" id="floatBox">
+
   <button class="float-btn" id="supportBtn">
     <img
       src="https://img.magnific.com/free-psd/cute-3d-robot-waving-hand-cartoon-vector-icon-illustration-people-technology-isolated-flat-vector_138676-10649.jpg"
-      onerror="this.style.display='none';this.parentElement.textContent='🤖'"
+      onerror="this.style.display='none'"
     >
   </button>
 
-  <!-- CODE -->
   <button class="float-btn" id="codeBtn">
     <img
       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZBlj1OfuEgBEc3QyFxH0vc1SR5r7zmt_w-8e_89DxeQ&s"
-      onerror="this.style.display='none';this.parentElement.textContent='🌈'"
+      onerror="this.style.display='none'"
     >
   </button>
 
@@ -617,27 +620,30 @@ body{
 
 
 <!-- THÔNG BÁO -->
-<div class="overlay active" id="noticeModal">
+<div class="modal-overlay active" id="welcomeModal">
 
-  <div class="modal notice">
+  <div class="modal welcome">
 
-    <div class="modal-title">
-      🎮 KHO GAME DEV
+    <div class="modal-head">
+      <button class="close-btn" id="closeWelcome">
+        ×
+      </button>
     </div>
 
-    <div class="notice-text">
-      XIN CHÀO TẤT CẢ DEV 👋<br><br>
+    <h2>
+      XIN CHÀO TẤT CẢ DEV 👋
+    </h2>
 
+    <p>
       ĐÂY LÀ KHO GAME CỘNG ĐỒNG ĐỂ TẠO GAME
-      VÀ CHO MỌI NGƯỜI TRẢI NGHIỆM GAME
-      VÀ ĐÁNH GIÁ.<br><br>
+      VÀ CHO MỌI NGƯỜI TRẢI NGHIỆM GAME VÀ ĐÁNH GIÁ.
+      <br><br>
+      NẾU GAME TỆ QUÁ ADMIN SẼ XÓA GAME ĐÓ
+      KHỎI NỀN TẢNG KHO GAME DEV X.
+    </p>
 
-      NẾU GAME TỆ QUÁ, ADMIN SẼ XÓA GAME ĐÓ
-      KHỎI NỀN TẢNG KHO GAME.
-    </div>
-
-    <button class="submit" id="closeNotice">
-      X ĐỂ THOÁT
+    <button class="welcome-close" id="welcomeOk">
+      ĐÃ HIỂU
     </button>
 
   </div>
@@ -646,100 +652,125 @@ body{
 
 
 <!-- ĐĂNG GAME -->
-<div class="overlay" id="uploadModal">
+<div class="modal-overlay" id="uploadModal">
 
   <div class="modal">
 
     <div class="modal-head">
 
+      <button class="close-btn" id="closeUpload">
+        ×
+      </button>
+
       <div class="modal-title">
         🚀 ĐĂNG GAME
       </div>
 
-      <button class="close" id="closeUpload">×</button>
-
     </div>
 
-    <div class="info-box">
-      Mỗi thiết bị có <b>10 lượt đăng game</b>.
-      Lượt đăng sẽ reset lúc <b>00:00 giờ Việt Nam</b> mỗi ngày.
+    <div class="notice">
+      Mỗi thiết bị có 10 lượt đăng game mỗi ngày.
+      Lượt đăng được reset lúc 00:00 theo giờ Việt Nam.
     </div>
+
 
     <div class="field">
 
-      <label>QUỐC GIA</label>
+      <label>
+        QUỐC GIA
+      </label>
 
       <select id="inputCountry">
 
-        <option value="🇻🇳 Việt Nam">
+        <option value="Việt Nam">
           🇻🇳 Việt Nam
         </option>
 
-        <option value="🇮🇩 Indonesia">
+        <option value="Indonesia">
           🇮🇩 Indonesia
         </option>
 
-        <option value="🇹🇭 Thailand">
+        <option value="Thailand">
           🇹🇭 Thailand
         </option>
 
-        <option value="🇨🇳 China">
+        <option value="China">
           🇨🇳 China
+        </option>
+
+        <option value="USA">
+          🇺🇸 USA
         </option>
 
       </select>
 
     </div>
 
-    <div class="field">
-
-      <label>TÊN TÁC GIẢ</label>
-
-      <input
-        id="inputAuthor"
-        maxlength="40"
-        placeholder="Nhập tên tác giả"
-      >
-
-    </div>
 
     <div class="field">
 
-      <label>TÊN GAME</label>
+      <label>
+        TÊN GAME
+      </label>
 
       <input
         id="inputName"
         maxlength="60"
-        placeholder="Ví dụ: Flappy Bird"
+        placeholder="Tên game"
       >
 
     </div>
 
+
     <div class="field">
 
-      <label>MÔ TẢ GAME</label>
+      <label>
+        TÊN TÁC GIẢ
+      </label>
+
+      <input
+        id="inputAuthor"
+        maxlength="50"
+        placeholder="Tên tác giả"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        MÔ TẢ GAME
+      </label>
 
       <textarea
         id="inputDesc"
-        maxlength="200"
-        placeholder="Mô tả game..."
+        maxlength="250"
+        placeholder="Mô tả game"
       ></textarea>
 
     </div>
 
+
     <div class="field">
 
-      <label>CODE INDEX HTML</label>
+      <label>
+        CODE HTML / CSS / JS
+      </label>
 
       <textarea
-        class="code"
+        class="code-area"
         id="inputCode"
         placeholder="Dán code HTML của game vào đây..."
       ></textarea>
 
     </div>
 
-    <button class="submit" id="submitGame">
+
+    <button
+      class="submit-btn"
+      id="submitGame"
+    >
       🚀 ĐĂNG GAME
     </button>
 
@@ -748,165 +779,233 @@ body{
 </div>
 
 
-<!-- CHƠI GAME -->
-<div class="overlay" id="playModal">
-
-  <div class="modal play-modal">
-
-    <div class="play-top">
-
-      <div>
-
-        <div class="play-title" id="playName">
-          GAME
-        </div>
-
-        <div class="play-author" id="playAuthor">
-          Tác giả
-        </div>
-
-      </div>
-
-      <button class="close" id="closePlay">×</button>
-
-    </div>
-
-    <div class="play-area">
-
-      <button
-        class="play-button"
-        id="startGame"
-      >
-        ▶ PLAY
-      </button>
-
-      <iframe
-        class="game-frame"
-        id="playFrame"
-        sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock"
-      ></iframe>
-
-    </div>
-
-    <div class="rating-area">
-
-      <div class="rating-title">
-        ⭐ ĐÁNH GIÁ GAME
-      </div>
-
-      <div class="stars" id="stars">
-
-        <button class="star" data-star="1">★</button>
-        <button class="star" data-star="2">★</button>
-        <button class="star" data-star="3">★</button>
-        <button class="star" data-star="4">★</button>
-        <button class="star" data-star="5">★</button>
-
-      </div>
-
-      <div
-        id="ratingInfo"
-        style="margin-top:7px;color:#8ca6c2;font-size:12px"
-      >
-        Chọn từ 1 đến 5 sao
-      </div>
-
-      <div class="comment-box">
-
-        <textarea
-          id="commentInput"
-          maxlength="300"
-          placeholder="Viết bình luận..."
-        ></textarea>
-
-        <button
-          class="comment-send"
-          id="commentSend"
-        >
-          💬 GỬI BÌNH LUẬN
-        </button>
-
-      </div>
-
-      <div class="comments" id="comments"></div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- CHAT -->
-<div class="overlay" id="chatModal">
-
-  <div class="modal chat-modal">
-
-    <div class="modal-head">
-
-      <div class="modal-title">
-        🤖 HỖ TRỢ DEV
-      </div>
-
-      <button class="close" id="closeChat">×</button>
-
-    </div>
-
-    <div class="chat-box" id="chatBox">
-
-      <div class="bot-message">
-        XIN CHÀO BẠN Ạ. BẠN CẦN HƯỚNG DẪN ĐĂNG GAME ĐÚNG KHÔNG Ạ?
-      </div>
-
-      <button class="quick" id="quickYes">
-        ĐÚNG VẬY
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- CODE -->
-<div class="overlay" id="codeModal">
+<!-- HỖ TRỢ -->
+<div class="modal-overlay" id="supportModal">
 
   <div class="modal">
 
     <div class="modal-head">
 
-      <div class="rainbow-title">
-        CODE MÀU RAINBOW
-      </div>
+      <button class="close-btn" id="closeSupport">
+        ×
+      </button>
 
-      <button class="close" id="closeCode">×</button>
+      <div class="modal-title">
+        🤖 HỖ TRỢ DEV
+      </div>
 
     </div>
 
-    <div class="field">
 
-      <label>NHẬP CODE</label>
+    <div class="chat-box">
+
+      <div class="bot">
+        XIN CHÀO BẠN Ạ. BẠN CẦN HƯỚNG DẪN
+        ĐĂNG GAME ĐÚNG KHÔNG Ạ
+      </div>
+
+
+      <button
+        class="quick-btn"
+        id="quickHelp"
+      >
+        ĐÚNG VẬY
+      </button>
+
+
+      <div
+        class="bot"
+        id="helpAnswer"
+        style="display:none"
+      >
+        BẠN CHẠY CODE TỪ HTML VÀ ĐẶT TÊN GAME
+        VÀ BẤM ĐĂNG GAME.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- NHẬP CODE -->
+<div class="modal-overlay" id="codeModal">
+
+  <div class="modal">
+
+    <div class="modal-head">
+
+      <button class="close-btn" id="closeCode">
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="code-title">
+      CODE MÀU RAINBOW
+    </div>
+
+
+    <div class="field">
 
       <input
         id="codeInput"
-        placeholder="Nhập code..."
+        placeholder="NHẬP CODE"
         autocomplete="off"
       >
 
     </div>
 
+
     <button
-      class="submit"
+      class="submit-btn"
       id="confirmCode"
     >
       XÁC NHẬN CODE
     </button>
 
+
     <div
-      id="codeResult"
-      style="margin-top:12px;text-align:center;font-size:13px"
+      id="codeMessage"
+      style="margin-top:12px;text-align:center"
     ></div>
+
+
+    <div class="code-note">
+      Nhập code hợp lệ để nhận lượt đăng.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- CHƠI GAME -->
+<div class="modal-overlay" id="playModal">
+
+  <div class="modal play-modal">
+
+    <div class="play-top">
+
+      <button
+        class="close-btn"
+        id="closePlay"
+      >
+        ×
+      </button>
+
+      <h2 id="playName">
+        Tên game
+      </h2>
+
+      <p id="playAuthor"></p>
+
+      <p id="playCountry"></p>
+
+    </div>
+
+
+    <div
+      id="playButtonArea"
+      style="padding:20px"
+    >
+
+      <button
+        class="play-btn"
+        id="startGame"
+      >
+        ▶ PLAY
+      </button>
+
+    </div>
+
+
+    <iframe
+      id="playFrame"
+      class="play-frame"
+      style="display:none"
+      sandbox="allow-scripts allow-same-origin allow-forms">
+    </iframe>
+
+
+    <div class="play-bottom">
+
+      <div
+        class="rating-info"
+        id="ratingInfo"
+      >
+        ⭐ Chưa có đánh giá
+      </div>
+
+
+      <div
+        class="stars"
+        id="stars"
+      >
+
+        <button
+          class="star"
+          data-star="1"
+        >
+          ★
+        </button>
+
+        <button
+          class="star"
+          data-star="2"
+        >
+          ★
+        </button>
+
+        <button
+          class="star"
+          data-star="3"
+        >
+          ★
+        </button>
+
+        <button
+          class="star"
+          data-star="4"
+        >
+          ★
+        </button>
+
+        <button
+          class="star"
+          data-star="5"
+        >
+          ★
+        </button>
+
+      </div>
+
+
+      <div class="comment-box">
+
+        <textarea
+          id="commentInput"
+          placeholder="Viết bình luận về game..."
+        ></textarea>
+
+        <button
+          class="comment-btn"
+          id="sendComment"
+        >
+          GỬI ĐÁNH GIÁ & BÌNH LUẬN
+        </button>
+
+      </div>
+
+
+      <div
+        class="comments"
+        id="comments"
+      ></div>
+
+    </div>
 
   </div>
 
@@ -914,161 +1013,210 @@ body{
 
 
 <script>
+/* ==============================
+   HÀM LẤY ID
+============================== */
 
-/* =====================================================
-   DATABASE LOCAL
-===================================================== */
-
-const GAME_KEY = "khoGameData_v5";
-const POST_KEY = "khoGamePostData_v5";
-const DEVICE_KEY = "khoGameDevice_v5";
-const CODE_KEY = "khoGameCode_v5";
-
-let games = [];
-let currentGameId = null;
-let selectedRating = 0;
+const $ = id => document.getElementById(id);
 
 
-/* =====================================================
-   DEVICE ID
-===================================================== */
+/* ==============================
+   DỮ LIỆU LƯU TRỮ
+============================== */
 
-function getDeviceId(){
+let games =
+  JSON.parse(
+    localStorage.getItem("khoGameData") || "[]"
+  );
 
-  let id = localStorage.getItem(DEVICE_KEY);
+let comments =
+  JSON.parse(
+    localStorage.getItem("khoGameComments") || "{}"
+  );
 
-  if(!id){
+let ratings =
+  JSON.parse(
+    localStorage.getItem("khoGameRatings") || "{}"
+  );
 
-    id =
-      "DEV-" +
-      Date.now() +
-      "-" +
-      Math.random().toString(36).slice(2);
+let plays =
+  JSON.parse(
+    localStorage.getItem("khoGamePlays") || "{}"
+  );
 
-    localStorage.setItem(DEVICE_KEY,id);
 
-  }
+/* ==============================
+   ID THIẾT BỊ
+============================== */
 
-  return id;
+let deviceId =
+  localStorage.getItem("devxDeviceId");
+
+if(!deviceId){
+
+  deviceId =
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .slice(2);
+
+  localStorage.setItem(
+    "devxDeviceId",
+    deviceId
+  );
+
 }
 
-const deviceId = getDeviceId();
 
+/* ==============================
+   NGÀY VIỆT NAM
+============================== */
 
-/* =====================================================
-   LOAD GAME
-===================================================== */
+function todayVN(){
 
-function loadGames(){
-
-  try{
-
-    const saved =
-      localStorage.getItem(GAME_KEY);
-
-    if(saved){
-
-      const parsed =
-        JSON.parse(saved);
-
-      if(Array.isArray(parsed)){
-        games = parsed;
-      }
-
+  return new Intl.DateTimeFormat(
+    "en-CA",
+    {
+      timeZone:"Asia/Ho_Chi_Minh",
+      year:"numeric",
+      month:"2-digit",
+      day:"2-digit"
     }
-
-  }catch(e){
-
-    console.error(e);
-    games = [];
-
-  }
+  ).format(new Date());
 
 }
 
 
-/* =====================================================
-   SAVE GAME
-===================================================== */
+/* ==============================
+   LƯỢT ĐĂNG
+============================== */
 
-function saveGames(){
+let uploadData =
+  JSON.parse(
+    localStorage.getItem(
+      "uploadLimitData"
+    ) || "null"
+  );
 
-  try{
 
-    localStorage.setItem(
-      GAME_KEY,
-      JSON.stringify(games)
-    );
+if(
+  !uploadData ||
+  uploadData.date !== todayVN()
+){
 
-  }catch(e){
+  uploadData = {
+    date:todayVN(),
+    turns:10
+  };
 
-    alert(
-      "⚠️ Không thể lưu game. Bộ nhớ thiết bị có thể đã đầy."
-    );
-
-  }
+  localStorage.setItem(
+    "uploadLimitData",
+    JSON.stringify(uploadData)
+  );
 
 }
 
 
-/* =====================================================
-   SAMPLE GAME
-===================================================== */
+function updateTurns(){
 
-function createSamples(){
+  $("turnText").textContent =
+    "🎮 Còn " +
+    uploadData.turns +
+    " lượt đăng game hôm nay";
 
-  if(games.length > 0) return;
+}
 
-  games = [
+updateTurns();
+
+
+/* ==============================
+   GAME MẪU
+============================== */
+
+if(games.length===0){
+
+  games=[
 
     {
-      id:Date.now(),
-
+      id:1,
       name:"Click Đổi Màu",
-
-      author:"KHO GAME DEV",
-
-      country:"🇻🇳 Việt Nam",
-
+      author:"DEV X",
+      country:"Việt Nam",
       desc:"Bấm vào màn hình để đổi màu.",
-
-      code:`
-<!DOCTYPE html>
+      code:`<!DOCTYPE html>
 <html>
 <body
-style="
-margin:0;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#3498db;
-color:white;
-font-family:Arial;
-cursor:pointer
-"
-onclick="
-document.body.style.background=
-'hsl('+Math.random()*360+',70%,50%)'
-">
+onclick="this.style.background='hsl('+Math.random()*360+',70%,50%)'"
+style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:#222;color:white;font-family:Arial">
 
-<h1>👆 BẤM ĐỂ ĐỔI MÀU</h1>
+<h1>👆 BẤM MÀN HÌNH</h1>
 
 </body>
-</html>
-`,
-
-      ratings:[],
-
-      comments:[],
-
-      plays:0,
-
-      playDevices:[],
-
+</html>`,
       paused:false,
+      created:Date.now()
+    },
 
-      createdAt:Date.now()
+
+    {
+      id:2,
+      name:"Đoán Số",
+      author:"DEV X",
+      country:"Việt Nam",
+      desc:"Đoán số từ 1 đến 100.",
+      code:`<!DOCTYPE html>
+<html>
+
+<body
+style="background:#10182b;color:white;font-family:Arial;text-align:center;padding-top:80px">
+
+<h2>🎯 ĐOÁN SỐ</h2>
+
+<input
+id="n"
+type="number"
+style="padding:12px">
+
+<button
+onclick="go()"
+style="padding:12px">
+
+Đoán
+
+</button>
+
+<p id="m"></p>
+
+<script>
+
+let secret=Math.floor(Math.random()*100)+1;
+
+function go(){
+
+let n=Number(
+document.getElementById('n').value
+);
+
+let m=
+document.getElementById('m');
+
+if(n===secret)
+m.innerText='🎉 ĐÚNG RỒI!';
+
+else if(n<secret)
+m.innerText='📈 LỚN HƠN';
+
+else
+m.innerText='📉 NHỎ HƠN';
+
+}
+
+<\/script>
+
+</body>
+</html>`,
+      paused:false,
+      created:Date.now()
     }
 
   ];
@@ -1078,121 +1226,188 @@ document.body.style.background=
 }
 
 
-/* =====================================================
-   POST LIMIT
-===================================================== */
+/* ==============================
+   LƯU GAME
+============================== */
 
-function getVietnamDate(){
+function saveGames(){
 
-  return new Date().toLocaleDateString(
-    "en-CA",
-    {
-      timeZone:"Asia/Ho_Chi_Minh"
-    }
+  localStorage.setItem(
+    "khoGameData",
+    JSON.stringify(games)
   );
 
 }
 
-function getPostData(){
 
-  try{
+/* ==============================
+   LƯU TẤT CẢ
+============================== */
 
-    const data =
-      JSON.parse(
-        localStorage.getItem(POST_KEY) || "{}"
+function saveAll(){
+
+  localStorage.setItem(
+    "khoGameComments",
+    JSON.stringify(comments)
+  );
+
+  localStorage.setItem(
+    "khoGameRatings",
+    JSON.stringify(ratings)
+  );
+
+  localStorage.setItem(
+    "khoGamePlays",
+    JSON.stringify(plays)
+  );
+
+}
+
+
+/* ==============================
+   ESCAPE HTML
+============================== */
+
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    c=>({
+
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+
+    })[c]
+  );
+
+}
+
+
+function escapeAttr(s){
+
+  return String(s)
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+/* ==============================
+   ĐÁNH GIÁ
+============================== */
+
+function getRatings(id){
+
+  return ratings[id] || [];
+
+}
+
+
+function ratingAverage(id){
+
+  const arr =
+    getRatings(id);
+
+  if(!arr.length)
+    return 0;
+
+  return arr.reduce(
+    (a,b)=>a+b,
+    0
+  ) / arr.length;
+
+}
+
+
+function countOneStars(id){
+
+  return getRatings(id)
+    .filter(x=>x===1)
+    .length;
+
+}
+
+
+/* ==============================
+   XÓA GAME 500 LẦN 1 SAO
+============================== */
+
+function checkBadGame(game){
+
+  if(
+    countOneStars(game.id)>=500
+  ){
+
+    games =
+      games.filter(
+        x=>x.id!==game.id
       );
 
-    const today =
-      getVietnamDate();
+    saveGames();
 
-    if(data.date !== today){
+    delete comments[game.id];
+    delete ratings[game.id];
+    delete plays[game.id];
 
-      return {
-        date:today,
-        count:0
-      };
+    saveAll();
 
-    }
-
-    return data;
-
-  }catch(e){
-
-    return {
-      date:getVietnamDate(),
-      count:0
-    };
+    return true;
 
   }
 
-}
-
-function savePostData(data){
-
-  localStorage.setItem(
-    POST_KEY,
-    JSON.stringify(data)
-  );
-
-}
-
-function getRemainingPosts(){
-
-  const data = getPostData();
-
-  return Math.max(
-    0,
-    10 - data.count
-  );
+  return false;
 
 }
 
 
-/* =====================================================
-   ESCAPE
-===================================================== */
-
-function escapeHtml(str){
-
-  return String(str || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =====================================================
-   RENDER
-===================================================== */
+/* ==============================
+   HIỂN THỊ GAME
+============================== */
 
 function renderGames(filter=""){
 
   const grid =
-    document.getElementById("gameGrid");
+    $("gameGrid");
 
   const f =
-    filter.trim().toLowerCase();
+    filter
+      .trim()
+      .toLowerCase();
+
 
   const list =
     games.filter(g=>{
 
-      return (
-        !f ||
-        String(g.name).toLowerCase().includes(f) ||
-        String(g.author).toLowerCase().includes(f) ||
-        String(g.desc).toLowerCase().includes(f)
-      );
+      return !f ||
+        g.name
+          .toLowerCase()
+          .includes(f) ||
+
+        g.author
+          .toLowerCase()
+          .includes(f) ||
+
+        g.desc
+          .toLowerCase()
+          .includes(f);
 
     });
 
-  if(list.length===0){
 
-    grid.innerHTML = `
-      <div class="empty-state">
+  if(!list.length){
+
+    grid.innerHTML=`
+      <div style="
+        grid-column:1/-1;
+        text-align:center;
+        padding:60px;
+        color:#68809b">
+
         🔍 Không tìm thấy game
+
       </div>
     `;
 
@@ -1200,67 +1415,43 @@ function renderGames(filter=""){
 
   }
 
+
   grid.innerHTML =
     list.map(g=>{
 
-      const ratings =
-        Array.isArray(g.ratings)
-        ? g.ratings
-        : [];
-
       const avg =
-        ratings.length
-        ? (
-            ratings.reduce(
-              (a,b)=>a+b.star,
-              0
-            ) / ratings.length
-          ).toFixed(1)
-        : "0.0";
+        ratingAverage(g.id);
 
-      const oneStars =
-        ratings.filter(
-          r=>r.star===1
-        ).length;
+      const ratingText =
+        avg
+          ? "⭐ "+
+            avg.toFixed(1)+
+            " / 5"
+          : "⭐ Chưa có đánh giá";
 
-      const paused =
-        g.paused === true;
+
+      const playCount =
+        Number(
+          plays[g.id]?.count || 0
+        );
+
 
       return `
 
         <div
-          class="game-card"
+          class="game-card ${g.paused?"paused":""}"
           data-id="${g.id}"
         >
 
           <div class="game-thumb">
 
-            ${
-              paused
-              ?
-              `
-              <div style="
-                width:100%;
-                height:100%;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:#ffb4b4;
-                font-weight:bold;
-              ">
-                ⏸️ TẠM NGỪNG
-              </div>
-              `
-              :
-              `
-              <iframe
-                srcdoc="${escapeAttr(g.code)}"
-                sandbox="allow-scripts"
-              ></iframe>
-              `
-            }
+            <iframe
+              srcdoc="${escapeAttr(g.code)}"
+              sandbox="allow-scripts">
+            </iframe>
 
           </div>
+
 
           <div class="game-info">
 
@@ -1268,41 +1459,42 @@ function renderGames(filter=""){
               ${escapeHtml(g.name)}
             </div>
 
+
             <div class="game-author">
-              👤 ${escapeHtml(g.author || "Ẩn danh")}
+              👤 ${escapeHtml(g.author || "Không rõ")}
             </div>
 
+
             <div class="game-country">
-              ${escapeHtml(g.country || "🇻🇳 Việt Nam")}
+              🌍 ${escapeHtml(g.country || "Không rõ")}
             </div>
+
 
             <div class="game-desc">
               ${escapeHtml(g.desc || "Không có mô tả")}
             </div>
 
+
             <div class="game-rating">
-              ⭐ ${avg}/5
-              · ${ratings.length} đánh giá
+              ${ratingText}
             </div>
+
 
             <div class="play-count">
-              👁️ ${g.plays || 0} lượt chơi
+              👁 ${playCount} lượt chơi
             </div>
 
+
             ${
-              oneStars >= 500
-              ?
+              g.paused
+              ? `
+                <div style="
+                  color:#f39c12;
+                  margin-top:6px">
+                  ⏸ GAME ĐANG TẠM NGỪNG
+                </div>
               `
-              <div style="
-                color:#ff6969;
-                font-size:11px;
-                margin-top:5px
-              ">
-                ⚠️ Đã đạt 500 lượt 1⭐
-              </div>
-              `
-              :
-              ""
+              :""
             }
 
           </div>
@@ -1313,6 +1505,7 @@ function renderGames(filter=""){
 
     }).join("");
 
+
   document
     .querySelectorAll(".game-card")
     .forEach(card=>{
@@ -1320,9 +1513,13 @@ function renderGames(filter=""){
       card.addEventListener(
         "click",
         ()=>{
-          openPlay(
-            Number(card.dataset.id)
+
+          openPlayModal(
+            Number(
+              card.dataset.id
+            )
           );
+
         }
       );
 
@@ -1331,131 +1528,555 @@ function renderGames(filter=""){
 }
 
 
-/* =====================================================
-   ESCAPE ATTRIBUTE
-===================================================== */
+/* ==============================
+   PLAY GAME
+============================== */
 
-function escapeAttr(str){
+let currentGame=null;
+let selectedRating=0;
 
-  return String(str || "")
-    .replace(/&/g,"&amp;")
-    .replace(/"/g,"&quot;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
+
+function openPlayModal(id){
+
+  const g =
+    games.find(
+      x=>x.id===id
+    );
+
+  if(!g)
+    return;
+
+
+  if(g.paused){
+
+    alert(
+      "Game này đang tạm ngừng."
+    );
+
+    return;
+
+  }
+
+
+  currentGame=g;
+
+
+  $("playName")
+    .textContent=g.name;
+
+
+  $("playAuthor")
+    .textContent=
+      "👤 Tác giả: "+
+      g.author;
+
+
+  $("playCountry")
+    .textContent=
+      "🌍 Quốc gia: "+
+      g.country;
+
+
+  $("playFrame")
+    .style.display="none";
+
+
+  $("playButtonArea")
+    .style.display="block";
+
+
+  $("playFrame")
+    .srcdoc="";
+
+
+  selectedRating=0;
+
+
+  document
+    .querySelectorAll(".star")
+    .forEach(s=>{
+      s.classList.remove(
+        "selected"
+      );
+    });
+
+
+  renderRatingInfo();
+
+  renderComments();
+
+
+  $("playModal")
+    .classList.add("active");
 
 }
 
 
-/* =====================================================
-   UPLOAD MODAL
-===================================================== */
+/* ==============================
+   NÚT PLAY
+============================== */
+
+$("startGame")
+.addEventListener(
+  "click",
+  ()=>{
+
+    if(!currentGame)
+      return;
+
+
+    $("playButtonArea")
+      .style.display="none";
+
+
+    $("playFrame")
+      .style.display="block";
+
+
+    $("playFrame")
+      .srcdoc=
+        currentGame.code;
+
+
+    if(!plays[currentGame.id]){
+
+      plays[currentGame.id]={
+        devices:[],
+        count:0
+      };
+
+    }
+
+
+    if(
+      !plays[currentGame.id]
+        .devices
+        .includes(deviceId)
+    ){
+
+      plays[currentGame.id]
+        .devices
+        .push(deviceId);
+
+
+      plays[currentGame.id].count =
+        plays[currentGame.id]
+          .devices.length;
+
+
+      saveAll();
+
+
+      renderGames(
+        $("searchInput").value
+      );
+
+    }
+
+  }
+);
+
+
+/* ==============================
+   CHỌN SAO
+============================== */
 
 document
-  .getElementById("addBtn")
-  .onclick = ()=>{
+  .querySelectorAll(".star")
+  .forEach(star=>{
 
-    const remaining =
-      getRemainingPosts();
+    star.addEventListener(
+      "click",
+      ()=>{
 
-    if(remaining <= 0){
+        if(!currentGame)
+          return;
+
+
+        const value =
+          Number(
+            star.dataset.star
+          );
+
+
+        const already =
+          localStorage.getItem(
+            "rated_"+currentGame.id
+          );
+
+
+        if(already){
+
+          alert(
+            "Thiết bị này đã đánh giá game này rồi."
+          );
+
+          return;
+
+        }
+
+
+        selectedRating=value;
+
+
+        document
+          .querySelectorAll(".star")
+          .forEach(s=>{
+
+            s.classList.toggle(
+              "selected",
+              Number(
+                s.dataset.star
+              )<=value
+            );
+
+          });
+
+      }
+    );
+
+  });
+
+
+/* ==============================
+   GỬI ĐÁNH GIÁ
+============================== */
+
+$("sendComment")
+.addEventListener(
+  "click",
+  ()=>{
+
+    if(!currentGame)
+      return;
+
+
+    if(selectedRating===0){
 
       alert(
-        "⚠️ Thiết bị đã hết 10 lượt đăng hôm nay. Lượt đăng sẽ reset lúc 00:00 giờ Việt Nam."
+        "Vui lòng chọn từ 1 đến 5 sao."
       );
 
       return;
 
     }
 
-    document
-      .getElementById("uploadModal")
-      .classList.add("active");
 
-  };
+    const key =
+      "rated_"+currentGame.id;
 
 
-document
-  .getElementById("closeUpload")
-  .onclick = ()=>{
-
-    document
-      .getElementById("uploadModal")
-      .classList.remove("active");
-
-  };
-
-
-/* =====================================================
-   SUBMIT GAME
-===================================================== */
-
-document
-  .getElementById("submitGame")
-  .onclick = ()=>{
-
-    const post =
-      getPostData();
-
-    if(post.count >= 10){
+    if(
+      localStorage.getItem(key)
+    ){
 
       alert(
-        "⚠️ Bạn đã hết 10 lượt đăng game hôm nay."
+        "Thiết bị này đã đánh giá game này rồi."
       );
 
       return;
 
     }
 
-    const country =
-      document.getElementById(
-        "inputCountry"
-      ).value;
 
-    const author =
-      document.getElementById(
-        "inputAuthor"
-      ).value.trim();
+    if(!ratings[currentGame.id]){
 
-    const name =
-      document.getElementById(
-        "inputName"
-      ).value.trim();
+      ratings[currentGame.id]=[];
 
-    const desc =
-      document.getElementById(
-        "inputDesc"
-      ).value.trim();
+    }
+
+
+    ratings[currentGame.id]
+      .push(selectedRating);
+
+
+    localStorage.setItem(
+      key,
+      "1"
+    );
+
+
+    const text =
+      $("commentInput")
+        .value
+        .trim();
+
+
+    if(text){
+
+      if(!comments[currentGame.id]){
+
+        comments[currentGame.id]=[];
+
+      }
+
+
+      comments[currentGame.id]
+        .push({
+
+          text:text,
+
+          device:deviceId,
+
+          time:
+            new Date()
+              .toLocaleString(
+                "vi-VN"
+              )
+
+        });
+
+    }
+
+
+    saveAll();
+
+
+    if(
+      checkBadGame(
+        currentGame
+      )
+    ){
+
+      alert(
+        "Game đã đạt 500 đánh giá 1★ và đã bị xóa."
+      );
+
+
+      $("playModal")
+        .classList
+        .remove("active");
+
+
+      currentGame=null;
+
+      renderGames();
+
+      return;
+
+    }
+
+
+    $("commentInput")
+      .value="";
+
+
+    renderRatingInfo();
+
+    renderComments();
+
+    renderGames(
+      $("searchInput").value
+    );
+
+
+    alert(
+      "Đã gửi đánh giá!"
+    );
+
+  }
+);
+
+
+/* ==============================
+   THÔNG TIN ĐÁNH GIÁ
+============================== */
+
+function renderRatingInfo(){
+
+  if(!currentGame)
+    return;
+
+
+  const arr =
+    getRatings(
+      currentGame.id
+    );
+
+
+  if(!arr.length){
+
+    $("ratingInfo")
+      .textContent=
+        "⭐ Chưa có đánh giá";
+
+    return;
+
+  }
+
+
+  const avg =
+    ratingAverage(
+      currentGame.id
+    );
+
+
+  $("ratingInfo")
+    .textContent=
+      "⭐ "+
+      avg.toFixed(1)+
+      " / 5 • "+
+      arr.length+
+      " đánh giá • "+
+      countOneStars(
+        currentGame.id
+      )+
+      " lượt 1★";
+
+}
+
+
+/* ==============================
+   BÌNH LUẬN
+============================== */
+
+function renderComments(){
+
+  if(!currentGame)
+    return;
+
+
+  const list =
+    comments[
+      currentGame.id
+    ] || [];
+
+
+  if(!list.length){
+
+    $("comments")
+      .innerHTML=
+        "<p style='color:#6e87a1'>Chưa có bình luận.</p>";
+
+    return;
+
+  }
+
+
+  $("comments")
+    .innerHTML=
+      list.map(c=>`
+
+        <div class="comment">
+
+          <div>
+            💬 ${escapeHtml(c.text)}
+          </div>
+
+          <small style="color:#66809b">
+            ${escapeHtml(c.time)}
+          </small>
+
+        </div>
+
+      `).join("");
+
+}
+
+
+/* ==============================
+   MỞ KHUNG ĐĂNG
+============================== */
+
+$("addBtn")
+.addEventListener(
+  "click",
+  ()=>{
+
+    if(uploadData.turns<=0){
+
+      alert(
+        "Bạn đã hết lượt đăng game hôm nay. Hãy chờ 00:00 để reset."
+      );
+
+      return;
+
+    }
+
+
+    $("uploadModal")
+      .classList
+      .add("active");
+
+  }
+);
+
+
+/* ==============================
+   ĐĂNG GAME
+============================== */
+
+$("submitGame")
+.addEventListener(
+  "click",
+  ()=>{
+
+    if(uploadData.turns<=0){
+
+      alert(
+        "Đã hết lượt đăng game."
+      );
+
+      return;
+
+    }
+
 
     const code =
-      document.getElementById(
-        "inputCode"
-      ).value.trim();
+      $("inputCode")
+        .value
+        .trim();
+
+
+    const name =
+      $("inputName")
+        .value
+        .trim();
+
+
+    const author =
+      $("inputAuthor")
+        .value
+        .trim();
+
+
+    const desc =
+      $("inputDesc")
+        .value
+        .trim();
+
+
+    const country =
+      $("inputCountry")
+        .value;
+
+
+    if(!code){
+
+      alert(
+        "Vui lòng nhập code HTML."
+      );
+
+      return;
+
+    }
+
+
+    if(!name){
+
+      alert(
+        "Vui lòng đặt tên game."
+      );
+
+      return;
+
+    }
 
 
     if(!author){
 
       alert(
-        "⚠️ Vui lòng nhập tên tác giả!"
-      );
-
-      return;
-
-    }
-
-    if(!name){
-
-      alert(
-        "⚠️ Vui lòng nhập tên game!"
-      );
-
-      return;
-
-    }
-
-    if(!code){
-
-      alert(
-        "⚠️ Vui lòng nhập code INDEX HTML!"
+        "Vui lòng nhập tên tác giả."
       );
 
       return;
@@ -1463,13 +2084,9 @@ document
     }
 
 
-    const game = {
+    games.unshift({
 
-      id:
-        Date.now() +
-        Math.floor(
-          Math.random()*1000
-        ),
+      id:Date.now(),
 
       name:name,
 
@@ -1481,275 +2098,356 @@ document
 
       code:code,
 
-      ratings:[],
-
-      comments:[],
-
-      plays:0,
-
-      playDevices:[],
-
       paused:false,
 
-      createdAt:Date.now()
+      created:Date.now()
 
-    };
-
-
-    games.unshift(game);
-
-    saveGames();
-
-
-    post.count++;
-
-    post.date =
-      getVietnamDate();
-
-    savePostData(post);
-
-
-    document
-      .getElementById("inputAuthor")
-      .value="";
-
-    document
-      .getElementById("inputName")
-      .value="";
-
-    document
-      .getElementById("inputDesc")
-      .value="";
-
-    document
-      .getElementById("inputCode")
-      .value="";
-
-
-    document
-      .getElementById("uploadModal")
-      .classList.remove("active");
-
-
-    renderGames(
-      document.getElementById(
-        "searchInput"
-      ).value
-    );
-
-
-    alert(
-      "✅ Đăng game thành công!\n\n" +
-      "Còn lại: " +
-      getRemainingPosts() +
-      "/10 lượt đăng hôm nay."
-    );
-
-  };
-
-
-/* =====================================================
-   PLAY
-===================================================== */
-
-function openPlay(id){
-
-  const game =
-    games.find(
-      g=>g.id===id
-    );
-
-  if(!game) return;
-
-  if(game.paused){
-
-    alert(
-      "⏸️ Game này đang tạm ngừng."
-    );
-
-    return;
-
-  }
-
-  currentGameId = id;
-
-  selectedRating = 0;
-
-  document
-    .querySelectorAll(".star")
-    .forEach(s=>{
-      s.classList.remove("active");
     });
 
 
-  document.getElementById(
-    "playName"
-  ).textContent =
-    game.name;
+    uploadData.turns--;
 
 
-  document.getElementById(
-    "playAuthor"
-  ).textContent =
-    "👤 " +
-    game.author +
-    " · " +
-    game.country;
+    localStorage.setItem(
+      "uploadLimitData",
+      JSON.stringify(uploadData)
+    );
 
 
-  document.getElementById(
-    "playFrame"
-  ).style.display="none";
+    saveGames();
+
+    updateTurns();
 
 
-  document.getElementById(
-    "startGame"
-  ).style.display="block";
+    renderGames(
+      $("searchInput").value
+    );
 
 
-  document.getElementById(
-    "playModal"
-  ).classList.add("active");
+    $("inputCode").value="";
+    $("inputName").value="";
+    $("inputAuthor").value="";
+    $("inputDesc").value="";
 
 
-  renderComments(game);
+    $("uploadModal")
+      .classList
+      .remove("active");
 
-}
+
+    alert(
+      "🎉 Đăng game thành công!\n\n"+
+      "Còn "+
+      uploadData.turns+
+      " lượt đăng game."
+    );
+
+  }
+);
 
 
-/* =====================================================
-   PLAY BUTTON
-===================================================== */
+/* ==============================
+   TÌM KIẾM
+============================== */
 
-document
-  .getElementById("startGame")
-  .onclick = ()=>{
+$("searchInput")
+.addEventListener(
+  "input",
+  e=>{
+    renderGames(
+      e.target.value
+    );
+  }
+);
 
-    const game =
-      games.find(
-        g=>g.id===currentGameId
+
+/* ==============================
+   HỖ TRỢ
+============================== */
+
+$("supportBtn")
+.addEventListener(
+  "click",
+  ()=>{
+    $("supportModal")
+      .classList
+      .add("active");
+  }
+);
+
+
+$("quickHelp")
+.addEventListener(
+  "click",
+  ()=>{
+    $("helpAnswer")
+      .style
+      .display="block";
+  }
+);
+
+
+/* ==============================
+   CODE
+============================== */
+
+$("codeBtn")
+.addEventListener(
+  "click",
+  ()=>{
+    $("codeModal")
+      .classList
+      .add("active");
+
+    $("codeMessage")
+      .textContent="";
+  }
+);
+
+
+/* ==============================
+   XÁC NHẬN CODE
+============================== */
+
+$("confirmCode")
+.addEventListener(
+  "click",
+  ()=>{
+
+    const code =
+      $("codeInput")
+        .value
+        .trim();
+
+
+    /*
+      12039bhn29
+      +1 lượt đăng
+      + đổi nền
+    */
+
+    if(
+      code==="12039bhn29"
+    ){
+
+      uploadData.turns += 1;
+
+
+      localStorage.setItem(
+        "uploadLimitData",
+        JSON.stringify(uploadData)
       );
 
-    if(!game) return;
+
+      document.body
+        .classList
+        .add("code-bg");
 
 
-    if(!Array.isArray(game.playDevices)){
+      localStorage.setItem(
+        "rainbowBackground",
+        "1"
+      );
 
-      game.playDevices=[];
+
+      updateTurns();
+
+
+      $("codeMessage")
+        .innerHTML=
+          "✅ CODE ĐÚNG!<br>+1 LƯỢT ĐĂNG GAME<br>ĐÃ ĐỔI NỀN.";
+
+
+      $("codeInput")
+        .value="";
+
+
+      return;
 
     }
 
 
     /*
-      Mỗi thiết bị chỉ tăng
-      lượt chơi 1 lần cho game.
+      BANGDEVFREE10LUOT
+      +10 lượt
     */
 
     if(
-      !game.playDevices.includes(
-        deviceId
-      )
+      code==="BANGDEVFREE10LUOT"
     ){
 
-      game.playDevices.push(
-        deviceId
+      uploadData.turns += 10;
+
+
+      localStorage.setItem(
+        "uploadLimitData",
+        JSON.stringify(uploadData)
       );
 
-      game.plays =
-        (game.plays || 0) + 1;
 
-      saveGames();
+      updateTurns();
 
-      renderGames(
-        document.getElementById(
-          "searchInput"
-        ).value
-      );
+
+      $("codeMessage")
+        .innerHTML=
+          "✅ CODE ĐÚNG!<br>+10 LƯỢT ĐĂNG GAME.";
+
+
+      $("codeInput")
+        .value="";
+
+
+      return;
 
     }
 
 
-    const frame =
-      document.getElementById(
-        "playFrame"
+    /*
+      BANGDEVHOANGNE
+      +5 lượt
+    */
+
+    if(
+      code==="BANGDEVHOANGNE"
+    ){
+
+      uploadData.turns += 5;
+
+
+      localStorage.setItem(
+        "uploadLimitData",
+        JSON.stringify(uploadData)
       );
 
 
-    frame.srcdoc =
-      game.code;
+      updateTurns();
 
 
-    frame.style.display =
-      "block";
+      $("codeMessage")
+        .innerHTML=
+          "✅ CODE ĐÚNG!<br>+5 LƯỢT ĐĂNG GAME.";
 
 
-    document.getElementById(
-      "startGame"
-    ).style.display =
-      "none";
-
-  };
+      $("codeInput")
+        .value="";
 
 
-/* =====================================================
-   CLOSE PLAY
-===================================================== */
+      return;
 
-document
-  .getElementById("closePlay")
-  .onclick = closePlay;
+    }
 
 
-function closePlay(){
+    $("codeMessage")
+      .innerHTML=
+        "❌ CODE KHÔNG ĐÚNG.";
 
-  document
-    .getElementById("playModal")
-    .classList.remove("active");
+  }
+);
 
-  document
-    .getElementById("playFrame")
-    .srcdoc="";
 
-  currentGameId=null;
+/* ==============================
+   KHÔI PHỤC NỀN CODE
+============================== */
+
+if(
+  localStorage.getItem(
+    "rainbowBackground"
+  )==="1"
+){
+
+  document.body
+    .classList
+    .add("code-bg");
 
 }
 
 
-/* =====================================================
-   RATING
-===================================================== */
+/* ==============================
+   ĐÓNG MODAL
+============================== */
+
+$("closeWelcome").onclick=()=>{
+  $("welcomeModal")
+    .classList
+    .remove("active");
+};
+
+
+$("welcomeOk").onclick=()=>{
+  $("welcomeModal")
+    .classList
+    .remove("active");
+};
+
+
+$("closeUpload").onclick=()=>{
+  $("uploadModal")
+    .classList
+    .remove("active");
+};
+
+
+$("closeSupport").onclick=()=>{
+  $("supportModal")
+    .classList
+    .remove("active");
+};
+
+
+$("closeCode").onclick=()=>{
+  $("codeModal")
+    .classList
+    .remove("active");
+};
+
+
+$("closePlay").onclick=()=>{
+
+  $("playModal")
+    .classList
+    .remove("active");
+
+  $("playFrame")
+    .srcdoc="";
+
+  currentGame=null;
+
+};
+
+
+/* ==============================
+   CLICK NGOÀI MODAL
+============================== */
 
 document
-  .querySelectorAll(".star")
-  .forEach(star=>{
+  .querySelectorAll(".modal-overlay")
+  .forEach(overlay=>{
 
-    star.addEventListener(
+    overlay.addEventListener(
       "click",
-      ()=>{
+      e=>{
 
-        const value =
-          Number(
-            star.dataset.star
-          );
+        if(
+          e.target===overlay
+        ){
 
-        selectedRating=value;
-
-
-        document
-          .querySelectorAll(".star")
-          .forEach(s=>{
-
-            s.classList.toggle(
-              "active",
-              Number(
-                s.dataset.star
-              ) <= value
-            );
-
-          });
+          overlay
+            .classList
+            .remove("active");
 
 
-        submitRating(value);
+          if(
+            overlay.id==="playModal"
+          ){
+
+            $("playFrame")
+              .srcdoc="";
+
+            currentGame=null;
+
+          }
+
+        }
 
       }
     );
@@ -1757,539 +2455,36 @@ document
   });
 
 
-function submitRating(value){
-
-  const game =
-    games.find(
-      g=>g.id===currentGameId
-    );
-
-  if(!game) return;
-
-
-  if(!Array.isArray(game.ratings)){
-
-    game.ratings=[];
-
-  }
-
-
-  /*
-    Một thiết bị chỉ đánh giá
-    một lần cho mỗi game.
-  */
-
-  const already =
-    game.ratings.find(
-      r=>r.device===deviceId
-    );
-
-
-  if(already){
-
-    alert(
-      "⚠️ Thiết bị này đã đánh giá game này rồi."
-    );
-
-    selectedRating =
-      already.star;
-
-    return;
-
-  }
-
-
-  game.ratings.push({
-
-    device:deviceId,
-
-    star:value,
-
-    time:Date.now()
-
-  });
-
-
-  saveGames();
-
-
-  document.getElementById(
-    "ratingInfo"
-  ).textContent =
-    "Bạn đã đánh giá " +
-    value +
-    "/5 sao";
-
-
-  /*
-    Nếu đạt 500 lượt 1 sao
-    game sẽ tự động xóa.
-  */
-
-  const oneStars =
-    game.ratings.filter(
-      r=>r.star===1
-    ).length;
-
-
-  if(oneStars >= 500){
-
-    games =
-      games.filter(
-        g=>g.id!==game.id
-      );
-
-    saveGames();
-
-    closePlay();
-
-    renderGames();
-
-    alert(
-      "⚠️ Game đã đạt 500 lượt đánh giá 1⭐ và đã được xóa khỏi Kho Game."
-    );
-
-    return;
-
-  }
-
-
-  renderGames(
-    document.getElementById(
-      "searchInput"
-    ).value
-  );
-
-}
-
-
-/* =====================================================
-   COMMENTS
-===================================================== */
-
-document
-  .getElementById("commentSend")
-  .onclick = ()=>{
-
-    const game =
-      games.find(
-        g=>g.id===currentGameId
-      );
-
-    if(!game) return;
-
-
-    const input =
-      document.getElementById(
-        "commentInput"
-      );
-
-    const text =
-      input.value.trim();
-
-
-    if(!text){
-
-      alert(
-        "⚠️ Hãy nhập bình luận!"
-      );
-
-      return;
-
-    }
-
-
-    if(!Array.isArray(game.comments)){
-
-      game.comments=[];
-
-    }
-
-
-    game.comments.push({
-
-      device:deviceId,
-
-      text:text,
-
-      time:Date.now()
-
-    });
-
-
-    input.value="";
-
-    saveGames();
-
-    renderComments(game);
-
-  };
-
-
-function renderComments(game){
-
-  const box =
-    document.getElementById(
-      "comments"
-    );
-
-
-  if(!game.comments ||
-     game.comments.length===0){
-
-    box.innerHTML =
-      `
-      <div style="
-        color:#728aa2;
-        font-size:12px;
-        padding-top:10px
-      ">
-        Chưa có bình luận.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    `
-    <div style="
-      font-weight:bold;
-      margin-bottom:8px
-    ">
-      💬 Bình luận
-    </div>
-    ` +
-
-    game.comments
-      .slice()
-      .reverse()
-      .map(c=>{
-
-        return `
-          <div class="comment">
-            ${escapeHtml(c.text)}
-          </div>
-        `;
-
-      })
-      .join("");
-
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-document
-  .getElementById("searchInput")
-  .addEventListener(
-    "input",
-    e=>{
-      renderGames(
-        e.target.value
-      );
-    }
-  );
-
-
-/* =====================================================
-   SUPPORT CHAT
-===================================================== */
-
-document
-  .getElementById("supportBtn")
-  .onclick = ()=>{
-
-    document
-      .getElementById("chatModal")
-      .classList.add("active");
-
-  };
-
-
-document
-  .getElementById("closeChat")
-  .onclick = ()=>{
-
-    document
-      .getElementById("chatModal")
-      .classList.remove("active");
-
-  };
-
-
-document
-  .getElementById("quickYes")
-  .onclick = ()=>{
-
-    const box =
-      document.getElementById(
-        "chatBox"
-      );
-
-
-    const user =
-      document.createElement("div");
-
-    user.className =
-      "user-message";
-
-    user.textContent =
-      "ĐÚNG VẬY";
-
-    box.appendChild(user);
-
-
-    const bot =
-      document.createElement("div");
-
-    bot.className =
-      "bot-message";
-
-    bot.textContent =
-      "BẠN CHẠY CODE TỪ HTML VÀ ĐẶT TÊN GAME VÀ BẤM ĐĂNG GAME";
-
-    box.appendChild(bot);
-
-
-    document
-      .getElementById("quickYes")
-      .remove();
-
-
-    box.scrollTop =
-      box.scrollHeight;
-
-  };
-
-
-/* =====================================================
-   CODE REDEEM
-===================================================== */
-
-document
-  .getElementById("codeBtn")
-  .onclick = ()=>{
-
-    document
-      .getElementById("codeModal")
-      .classList.add("active");
-
-    document
-      .getElementById("codeInput")
-      .value="";
-
-    document
-      .getElementById("codeResult")
-      .textContent="";
-
-  };
-
-
-document
-  .getElementById("closeCode")
-  .onclick = ()=>{
-
-    document
-      .getElementById("codeModal")
-      .classList.remove("active");
-
-  };
-
-
-/*
-  Mã:
-  BANGDEVFREE10LUOT = +10 lượt
-  BANGDEVHOANGNE = +5 lượt
-
-  Mỗi thiết bị chỉ nhập
-  mỗi mã 1 lần.
-
-  Mã có thời hạn 48 giờ
-  kể từ lần đầu được sử dụng
-  trên thiết bị.
-*/
-
-const REDEEM_CODES = {
-
-  "BANGDEVFREE10LUOT":10,
-
-  "BANGDEVHOANGNE":5
-
-};
-
-
-document
-  .getElementById("confirmCode")
-  .onclick = ()=>{
-
-    const input =
-      document.getElementById(
-        "codeInput"
-      );
-
-    const result =
-      document.getElementById(
-        "codeResult"
-      );
-
-
-    const code =
-      input.value
-        .trim()
-        .toUpperCase();
-
-
-    if(!REDEEM_CODES[code]){
-
-      result.style.color =
-        "#ff7373";
-
-      result.textContent =
-        "❌ CODE KHÔNG HỢP LỆ.";
-
-      return;
-
-    }
-
-
-    let data;
-
-    try{
-
-      data =
-        JSON.parse(
-          localStorage.getItem(
-            CODE_KEY
-          ) || "{}"
-        );
-
-    }catch(e){
-
-      data={};
-
-    }
-
-
-    /*
-      Kiểm tra thời hạn 48 giờ
-    */
-
-    const now =
-      Date.now();
-
-
-    if(
-      data.startedAt &&
-      now - data.startedAt >
-      48 * 60 * 60 * 1000
-    ){
-
-      data={};
-
-    }
-
-
-    if(!data.startedAt){
-
-      data.startedAt=now;
-
-    }
-
-
-    if(!Array.isArray(data.used)){
-
-      data.used=[];
-
-    }
-
-
-    if(data.used.includes(code)){
-
-      result.style.color =
-        "#ff7373";
-
-      result.textContent =
-        "❌ Thiết bị này đã sử dụng code này.";
-
-      return;
-
-    }
-
-
-    /*
-      Cộng lượt đăng
-    */
-
-    let post =
-      getPostData();
-
-
-    post.count =
-      Math.max(
-        0,
-        post.count -
-        REDEEM_CODES[code]
-      );
-
-
-    savePostData(post);
-
-
-    data.used.push(code);
-
-
-    localStorage.setItem(
-      CODE_KEY,
-      JSON.stringify(data)
-    );
-
-
-    result.style.color =
-      "#70e39b";
-
-    result.textContent =
-      "✅ XÁC NHẬN THÀNH CÔNG! ĐÃ CỘNG " +
-      REDEEM_CODES[code] +
-      " LƯỢT ĐĂNG GAME.";
-
-  };
-
-
-/* =====================================================
-   DRAG FLOAT BUTTONS
-===================================================== */
-
-let dragging=false;
-let dragTarget=null;
-let offsetX=0;
-let offsetY=0;
-
+/* ==============================
+   KÉO THẢ NÚT TRÒN
+============================== */
 
 document
   .querySelectorAll(".float-btn")
   .forEach(btn=>{
+
+    let dragging=false;
+    let startX=0;
+    let startY=0;
+    let moved=false;
+
 
     btn.addEventListener(
       "pointerdown",
       e=>{
 
         dragging=true;
-        dragTarget=btn;
+        moved=false;
 
         const rect =
           btn.getBoundingClientRect();
 
-        offsetX =
-          e.clientX -
+        startX =
+          e.clientX-
           rect.left;
 
-        offsetY =
-          e.clientY -
+        startY =
+          e.clientY-
           rect.top;
 
         btn.setPointerCapture(
@@ -2304,46 +2499,28 @@ document
       "pointermove",
       e=>{
 
-        if(!dragging ||
-           dragTarget!==btn)
+        if(!dragging)
           return;
 
 
-        const x =
-          Math.max(
-            5,
-            Math.min(
-              window.innerWidth -
-              btn.offsetWidth -
-              5,
-              e.clientX-offsetX
-            )
-          );
+        moved=true;
 
 
-        const y =
-          Math.max(
-            5,
-            Math.min(
-              window.innerHeight -
-              btn.offsetHeight -
-              5,
-              e.clientY-offsetY
-            )
-          );
-
-
-        btn.style.position =
+        btn.style.position=
           "fixed";
 
-        btn.style.left =
-          x+"px";
+        btn.style.left=
+          (
+            e.clientX-startX
+          )+"px";
 
-        btn.style.top =
-          y+"px";
+        btn.style.top=
+          (
+            e.clientY-startY
+          )+"px";
 
-        btn.style.bottom =
-          "auto";
+        btn.style.right="auto";
+        btn.style.bottom="auto";
 
       }
     );
@@ -2351,46 +2528,9 @@ document
 
     btn.addEventListener(
       "pointerup",
-      ()=>{
-        dragging=false;
-        dragTarget=null;
-      }
-    );
-
-  });
-
-
-/* =====================================================
-   MODAL BACKGROUND CLOSE
-===================================================== */
-
-document
-  .querySelectorAll(".overlay")
-  .forEach(overlay=>{
-
-    overlay.addEventListener(
-      "click",
       e=>{
 
-        if(e.target !== overlay)
-          return;
-
-        overlay.classList.remove(
-          "active"
-        );
-
-        if(
-          overlay.id ===
-          "playModal"
-        ){
-
-          document
-            .getElementById(
-              "playFrame"
-            )
-            .srcdoc="";
-
-        }
+        dragging=false;
 
       }
     );
@@ -2398,30 +2538,45 @@ document
   });
 
 
-/* =====================================================
-   NOTICE
-===================================================== */
+/* ==============================
+   RESET 00:00 VIỆT NAM
+============================== */
 
-document
-  .getElementById("closeNotice")
-  .onclick = ()=>{
+setInterval(
+  ()=>{
 
-    document
-      .getElementById(
-        "noticeModal"
-      )
-      .classList.remove("active");
-
-  };
+    const today =
+      todayVN();
 
 
-/* =====================================================
-   START
-===================================================== */
+    if(
+      uploadData.date!==today
+    ){
 
-loadGames();
+      uploadData={
+        date:today,
+        turns:10
+      };
 
-createSamples();
+
+      localStorage.setItem(
+        "uploadLimitData",
+        JSON.stringify(uploadData)
+      );
+
+
+      updateTurns();
+
+    }
+
+  },
+  1000
+);
+
+
+/* ==============================
+   HIỂN THỊ BAN ĐẦU
+============================== */
 
 renderGames();
 
