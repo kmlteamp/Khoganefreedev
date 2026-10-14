@@ -3,740 +3,365 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NCB Admin - Tạo Code Tặng Lượt</title>
+<title>HZX AI - Chat Bot</title>
 <style>
-:root{
-  --bg:#0a0e17;
-  --panel:#131824;
-  --panel2:#1a2030;
-  --border:#242c3d;
-  --text:#e8edf7;
-  --muted:#8892a6;
-  --purple:#7657ee;
-  --purple2:#5540b8;
-  --green:#35d69a;
-  --red:#ff3d5a;
-  --gold:#ffd166;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Inter,system-ui,-apple-system,sans-serif;
-  background:radial-gradient(ellipse at top,#1a1f35 0%,#0a0e17 70%);
-  color:var(--text);
-  min-height:100vh;
-  padding:20px;
-}
-.wrap{max-width:1000px;margin:0 auto}
-.header{
-  text-align:center;
-  margin-bottom:26px;
-  padding:24px;
-  background:linear-gradient(135deg,rgba(118,87,238,.15),rgba(85,64,184,.05));
-  border:1px solid rgba(118,87,238,.3);
-  border-radius:20px;
-}
-.header-logo{
-  width:70px;height:70px;
-  margin:0 auto 14px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#8a6cff,#5436c9);
-  display:grid;place-items:center;
-  font-size:34px;
-  box-shadow:0 12px 45px rgba(118,87,238,.5);
-}
-h1{
-  font-size:26px;
-  font-weight:900;
-  letter-spacing:-0.5px;
-  background:linear-gradient(135deg,#fff,#a78bfa);
-  -webkit-background-clip:text;background-clip:text;
-  color:transparent;
-  margin-bottom:6px;
-}
-.subtitle{color:var(--muted);font-size:13px}
-.admin-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:6px 14px;border-radius:20px;
-  background:rgba(255,209,102,.15);
-  border:1px solid rgba(255,209,102,.4);
-  color:var(--gold);
-  font-size:12px;font-weight:700;
-  margin-top:12px;
-}
-.panel{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:24px;
-  margin-bottom:20px;
-}
-.panel-title{
-  font-size:15px;
-  font-weight:800;
-  color:#fff;
-  margin-bottom:18px;
-  padding-bottom:12px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-  letter-spacing:0.5px;
-}
-.panel-title::before{
-  content:'';
-  width:4px;height:20px;
-  background:var(--purple);
-  border-radius:2px;
-}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:14px;
-  margin-bottom:18px;
-}
-.field label{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:8px;
-  letter-spacing:0.5px;
-  text-transform:uppercase;
-}
-.field input,.field select,.field textarea{
-  width:100%;
-  padding:13px 15px;
-  background:#0d1220;
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:var(--text);
-  font-family:'Courier New',monospace;
-  font-size:14px;
-  outline:none;
-  transition:all .2s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  border-color:var(--purple);
-  box-shadow:0 0 0 3px rgba(118,87,238,.2);
-}
-.field input::placeholder{color:#556}
-.btn{
-  padding:14px 24px;
-  border:0;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-  transition:all .2s;
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  letter-spacing:0.5px;
-}
-.btn-primary{
-  background:linear-gradient(135deg,#7657ee,#5540b8);
-  color:#fff;
-  box-shadow:0 6px 25px rgba(118,87,238,.4);
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(118,87,238,.7)}
-.btn-primary:active{transform:translateY(0)}
-.btn-green{
-  background:linear-gradient(135deg,#35d69a,#1a9d6e);
-  color:#000;
-  box-shadow:0 6px 25px rgba(53,214,154,.4);
-}
-.btn-green:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(53,214,154,.7)}
-.btn-danger{
-  background:linear-gradient(135deg,#ff3d5a,#c72e45);
-  color:#fff;
-}
-.btn-danger:hover{transform:translateY(-2px);box-shadow:0 8px 35px rgba(255,61,90,.6)}
-.btn-ghost{
-  background:transparent;
-  color:var(--muted);
-  border:1px solid var(--border);
-}
-.btn-ghost:hover{color:#fff;border-color:var(--purple)}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap}
-
-/* CODE LIST */
-.codes-list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  max-height:400px;
-  overflow-y:auto;
-  padding-right:6px;
-}
-.code-item{
-  background:#0d1220;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px 16px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  transition:all .2s;
-}
-.code-item:hover{border-color:var(--purple);background:#131a2e}
-.code-item.used{opacity:.5}
-.code-item.expired{opacity:.6;border-color:rgba(255,61,90,.4)}
-.code-value{
-  flex:1;
-  font-family:'Courier New',monospace;
-  font-size:15px;
-  font-weight:700;
-  color:var(--green);
-  letter-spacing:2px;
-  word-break:break-all;
-}
-.code-item.used .code-value{color:var(--muted);text-decoration:line-through}
-.code-info{
-  display:flex;
-  flex-direction:column;
-  gap:3px;
-  font-size:11px;
-  color:var(--muted);
-  min-width:150px;
-}
-.code-info b{color:#fff;font-size:12px;font-weight:700}
-.code-badge{
-  padding:3px 10px;border-radius:8px;
-  font-size:10px;font-weight:800;letter-spacing:0.5px;
-  text-transform:uppercase;
-}
-.badge-active{background:rgba(53,214,154,.15);color:var(--green);border:1px solid rgba(53,214,154,.4)}
-.badge-used{background:rgba(136,146,166,.15);color:var(--muted);border:1px solid rgba(136,146,166,.4)}
-.badge-expired{background:rgba(255,61,90,.15);color:var(--red);border:1px solid rgba(255,61,90,.4)}
-.code-actions{display:flex;gap:6px}
-.code-actions button{
-  background:#1a2030;
-  border:1px solid var(--border);
-  color:#aab5c9;
-  width:34px;height:34px;
-  border-radius:8px;
-  cursor:pointer;
-  display:grid;place-items:center;
-  transition:all .15s;
-  font-size:14px;
-}
-.code-actions button:hover{border-color:var(--purple);color:#fff}
-.code-actions button.del:hover{border-color:var(--red);color:var(--red)}
-
-/* RESULT */
-.result-box{
-  background:linear-gradient(135deg,rgba(53,214,154,.1),rgba(53,214,154,.05));
-  border:1px solid rgba(53,214,154,.4);
-  border-radius:14px;
-  padding:20px;
-  margin-top:18px;
-  display:none;
-}
-.result-box.show{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.result-label{
-  color:var(--green);
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:1.5px;
-  margin-bottom:12px;
-}
-.result-code{
-  font-family:'Courier New',monospace;
-  font-size:24px;
-  font-weight:900;
-  color:#fff;
-  background:#000;
-  padding:16px;
-  border-radius:10px;
-  letter-spacing:3px;
-  text-align:center;
-  margin-bottom:12px;
-  word-break:break-all;
-  border:1px solid rgba(53,214,154,.3);
-  box-shadow:0 0 30px rgba(53,214,154,.2) inset;
-}
-.copy-btn{
-  width:100%;
-  padding:12px;
-  background:#0d1220;
-  border:1px solid var(--border);
-  color:#aab5c9;
-  border-radius:10px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:700;
-  transition:all .15s;
-}
-.copy-btn:hover{border-color:var(--green);color:var(--green)}
-.copy-btn.copied{border-color:var(--green);color:var(--green);background:rgba(53,214,154,.1)}
-
-/* STATS */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
-  margin-bottom:20px;
-}
-.stat-card{
-  background:#0d1220;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:16px;
-  text-align:center;
-}
-.stat-value{
-  font-size:24px;
-  font-weight:900;
-  color:var(--purple);
-  margin-bottom:4px;
-}
-.stat-label{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:0.5px;
-  text-transform:uppercase;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  left:50%;bottom:24px;
-  transform:translateX(-50%) translateY(120px);
-  background:#303747;
-  color:#fff;
-  border:1px solid #4b566b;
-  padding:14px 24px;
-  border-radius:12px;
-  font-size:14px;
-  font-weight:600;
-  transition:transform .3s;
-  z-index:1000;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
-}
-.toast.show{transform:translateX(-50%) translateY(0)}
-.toast.success{background:linear-gradient(135deg,#1a3d2e,#0f2a1e);border-color:var(--green);color:var(--green)}
-.toast.error{background:linear-gradient(135deg,#3d1a1a,#2a0f0f);border-color:var(--red);color:#ff8888}
-
-.empty{
-  text-align:center;
-  padding:40px 20px;
-  color:var(--muted);
-  font-size:13px;
-}
-.empty-icon{font-size:48px;margin-bottom:12px;opacity:.4}
-
-@media(max-width:600px){
-  body{padding:12px}
-  .header{padding:18px}
-  .header-logo{width:56px;height:56px;font-size:28px}
-  h1{font-size:20px}
-  .panel{padding:16px}
-  .code-item{flex-wrap:wrap}
-  .code-info{min-width:100%}
-  .code-value{font-size:13px}
-  .result-code{font-size:18px;letter-spacing:2px}
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .chat-container {
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    background: rgba(20, 20, 35, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(120, 100, 255, 0.3);
+  }
+  .chat-header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 20px rgba(106, 17, 203, 0.4);
+  }
+  .avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #6a11cb;
+  }
+  .header-info h1 { font-size: 20px; font-weight: bold; }
+  .header-info p { font-size: 13px; opacity: 0.85; margin-top: 2px; }
+  .status-dot {
+    width: 10px; height: 10px;
+    background: #00ff88;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .chat-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .chat-body::-webkit-scrollbar { width: 6px; }
+  .chat-body::-webkit-scrollbar-thumb {
+    background: rgba(120, 100, 255, 0.5);
+    border-radius: 3px;
+  }
+  .message {
+    display: flex;
+    gap: 10px;
+    max-width: 80%;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+  .msg-avatar {
+    width: 35px; height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .message.bot .msg-avatar { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+  .message.user .msg-avatar { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .msg-content {
+    padding: 12px 18px;
+    border-radius: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  .message.bot .msg-content {
+    background: rgba(106, 17, 203, 0.25);
+    border: 1px solid rgba(106, 17, 203, 0.5);
+    border-top-left-radius: 4px;
+  }
+  .message.user .msg-content {
+    background: rgba(245, 87, 108, 0.25);
+    border: 1px solid rgba(245, 87, 108, 0.5);
+    border-top-right-radius: 4px;
+  }
+  .typing {
+    display: flex; gap: 5px;
+    padding: 12px 18px;
+    background: rgba(106, 17, 203, 0.25);
+    border-radius: 18px;
+    border-top-left-radius: 4px;
+    width: fit-content;
+  }
+  .typing span {
+    width: 8px; height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+  }
+  .chat-footer {
+    padding: 20px;
+    background: rgba(15, 12, 41, 0.8);
+    border-top: 1px solid rgba(120, 100, 255, 0.2);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .chat-footer input {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(120, 100, 255, 0.4);
+    background: rgba(30, 25, 60, 0.8);
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+  }
+  .chat-footer input:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 15px rgba(106, 17, 203, 0.5);
+  }
+  .chat-footer input::placeholder { color: #8899aa; }
+  .send-btn {
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .send-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(106, 17, 203, 0.7); }
+  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .welcome { text-align: center; padding: 40px 20px; opacity: 0.7; }
+  .welcome h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .welcome p { font-size: 14px; color: #8899aa; }
+  .suggestions {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin-top: 20px;
+  }
+  .suggestion {
+    padding: 8px 16px;
+    background: rgba(106, 17, 203, 0.2);
+    border: 1px solid rgba(106, 17, 203, 0.5);
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .suggestion:hover { background: rgba(106, 17, 203, 0.5); transform: translateY(-2px); }
+  @media (max-width: 600px) {
+    body { padding: 0; }
+    .chat-container { height: 100vh; border-radius: 0; max-width: 100%; }
+    .message { max-width: 90%; }
+  }
 </style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <div class="header">
-    <div class="header-logo">🔑</div>
-    <h1>NCB ADMIN PANEL</h1>
-    <div class="subtitle">Hệ thống tạo code tặng lượt chat cho NCB_AI</div>
-    <div class="admin-badge">
-      <span>👤</span>
-      <span>Admin: NGUYỄN CÔNG BẰNG</span>
+<div class="chat-container">
+  <div class="chat-header">
+    <div class="avatar">H</div>
+    <div class="header-info">
+      <h1>HZX AI</h1>
+      <p><span class="status-dot"></span>Đang hoạt động</p>
     </div>
   </div>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat-card">
-      <div class="stat-value" id="statTotal">0</div>
-      <div class="stat-label">Tổng Code</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statActive" style="color:var(--green)">0</div>
-      <div class="stat-label">Chưa Dùng</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statUsed" style="color:var(--muted)">0</div>
-      <div class="stat-label">Đã Dùng</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-value" id="statExpired" style="color:var(--red)">0</div>
-      <div class="stat-label">Hết Hạn</div>
-    </div>
-  </div>
-
-  <!-- TẠO CODE -->
-  <div class="panel">
-    <div class="panel-title">🎁 TẠO CODE MỚI</div>
-
-    <div class="grid">
-      <div class="field">
-        <label>Tiền tố code</label>
-        <input type="text" id="prefix" placeholder="NCB_" value="NCB_" maxlength="10">
-      </div>
-      <div class="field">
-        <label>Độ dài code (không tính prefix)</label>
-        <select id="length">
-          <option value="8">8 ký tự</option>
-          <option value="10" selected>10 ký tự</option>
-          <option value="12">12 ký tự</option>
-          <option value="16">16 ký tự</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Số lượt chat tặng</label>
-        <input type="number" id="bonus" placeholder="100000" value="100000" min="1000" step="1000">
-      </div>
-      <div class="field">
-        <label>Số lượng code</label>
-        <input type="number" id="quantity" placeholder="1" value="1" min="1" max="100">
-      </div>
-      <div class="field">
-        <label>Hạn sử dụng</label>
-        <select id="expire">
-          <option value="1">1 ngày</option>
-          <option value="7">7 ngày</option>
-          <option value="30" selected>30 ngày</option>
-          <option value="90">90 ngày</option>
-          <option value="0">Vĩnh viễn</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Ghi chú (tùy chọn)</label>
-        <input type="text" id="note" placeholder="VD: Tặng sự kiện 2026">
-      </div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-primary" id="createBtn">
-        <span>⚡</span>
-        <span>TẠO CODE</span>
-      </button>
-      <button class="btn btn-ghost" id="clearBtn">🗑 Xoá tất cả</button>
-    </div>
-
-    <!-- KẾT QUẢ -->
-    <div class="result-box" id="resultBox">
-      <div class="result-label">✅ CODE VỪA TẠO</div>
-      <div class="result-code" id="resultCode">NCB_XXXXXX</div>
-      <button class="copy-btn" id="copyBtn">📋 COPY TOÀN BỘ</button>
-    </div>
-  </div>
-
-  <!-- DANH SÁCH CODE -->
-  <div class="panel">
-    <div class="panel-title">📋 DANH SÁCH CODE</div>
-
-    <div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap">
-      <input type="text" id="searchCode" placeholder="🔍 Tìm code..." style="flex:1;min-width:200px;padding:11px 14px;background:#0d1220;border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Courier New',monospace;font-size:13px;outline:none">
-      <select id="filterStatus" style="padding:11px 14px;background:#0d1220;border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;outline:none">
-        <option value="all">Tất cả</option>
-        <option value="active">Chưa dùng</option>
-        <option value="used">Đã dùng</option>
-        <option value="expired">Hết hạn</option>
-      </select>
-    </div>
-
-    <div class="codes-list" id="codesList">
-      <div class="empty">
-        <div class="empty-icon">📭</div>
-        <div>Chưa có code nào. Nhấn "TẠO CODE" để bắt đầu.</div>
+  <div class="chat-body" id="chatBody">
+    <div class="welcome" id="welcome">
+      <h2>👋 Xin chào!</h2>
+      <p>Tôi là HZX AI. Hãy hỏi tôi bất cứ điều gì.</p>
+      <div class="suggestions">
+        <div class="suggestion" onclick="quickSend('Xin chào')">Xin chào</div>
+        <div class="suggestion" onclick="quickSend('Bạn là ai?')">Bạn là ai?</div>
+        <div class="suggestion" onclick="quickSend('Giải thích về AI')">Giải thích về AI</div>
+        <div class="suggestion" onclick="quickSend('Viết code Python hello world')">Code Python</div>
       </div>
     </div>
   </div>
 
-  <div style="text-align:center;padding:20px;color:var(--muted);font-size:12px;line-height:1.8">
-    NCB Admin Panel v1.0 · Bypass By nhatanh Dev<br>
-    Admin: <strong style="color:var(--gold)">NGUYỄN CÔNG BẰNG</strong>
+  <div class="chat-footer">
+    <input type="text" id="userInput" placeholder="Nhập tin nhắn..." autocomplete="off">
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
   </div>
-
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-"use strict";
+// ================= CẤU HÌNH =================
+const ACCOUNT_ID = '67b54121c64cc574ac984da1fd117cbf';
+const API_KEY = 'cfut_FVXXpO6mvT6ObBUwOYy8riTXlH9mspyOkoCQrirh3d96f215';
+const MODEL = '@cf/meta/llama-3-8b-instruct';
+const API_URL = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/ai/run/${MODEL}`;
 
-// ============================================================
-// NCB ADMIN PANEL - Tạo code tặng lượt chat
-// Bypass By nhatanh Dev
-// Admin: NGUYỄN CÔNG BẰNG
-// ============================================================
+let conversationHistory = [];
 
-const STORAGE_KEY = 'ncb_admin_codes';
+const chatBody = document.getElementById('chatBody');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
 
-const $ = id => document.getElementById(id);
+// ================= GỬI TIN NHẮN =================
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text) return;
 
-// Lấy danh sách code từ localStorage
-function getCodes(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return [];
-    const arr = JSON.parse(raw);
-    return Array.isArray(arr) ? arr : [];
-  }catch(e){ return []; }
-}
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.remove();
 
-// Lưu danh sách code
-function saveCodes(codes){
-  try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(codes));
-  }catch(e){
-    showToast('❌ Không lưu được. Kiểm tra localStorage', 'error');
-  }
-}
+  addMessage(text, 'user');
+  userInput.value = '';
+  sendBtn.disabled = true;
 
-// Tạo code ngẫu nhiên
-function generateCode(prefix, length){
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let code = prefix || '';
-  for(let i = 0; i < length; i++){
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
-}
+  conversationHistory.push({ role: 'user', content: text });
 
-// Đảm bảo code không trùng
-function generateUniqueCode(prefix, length, existing){
-  let attempts = 0;
-  let code;
-  do{
-    code = generateCode(prefix, length);
-    attempts++;
-    if(attempts > 100) throw new Error('Không tạo được code không trùng');
-  } while(existing.some(c => c.code === code));
-  return code;
-}
+  const typingEl = addTyping();
 
-// Kiểm tra trạng thái code
-function getStatus(item){
-  if(item.used) return 'used';
-  if(item.expiresAt && Date.now() > item.expiresAt) return 'expired';
-  return 'active';
-}
-
-// Định dạng ngày
-function formatDate(ts){
-  if(!ts) return 'Vĩnh viễn';
-  const d = new Date(ts);
-  const dd = String(d.getDate()).padStart(2, '0');
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const yyyy = d.getFullYear();
-  const hh = String(d.getHours()).padStart(2, '0');
-  const mi = String(d.getMinutes()).padStart(2, '0');
-  return dd + '/' + mm + '/' + yyyy + ' ' + hh + ':' + mi;
-}
-
-// Định dạng số
-function formatNumber(n){
-  return parseInt(n, 10).toLocaleString('vi-VN');
-}
-
-// Toast
-let toastTimer = null;
-function showToast(msg, type){
-  const t = $('toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + (type || '');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    t.classList.remove('show');
-  }, 3000);
-}
-
-// Render danh sách code
-function renderCodes(){
-  const list = $('codesList');
-  const codes = getCodes();
-  const searchQ = ($('searchCode')?.value || '').trim().toUpperCase();
-  const filter = $('filterStatus')?.value || 'all';
-
-  // Cập nhật stats
-  let active = 0, used = 0, expired = 0;
-  codes.forEach(c => {
-    const st = getStatus(c);
-    if(st === 'active') active++;
-    else if(st === 'used') used++;
-    else expired++;
-  });
-  $('statTotal').textContent = codes.length;
-  $('statActive').textContent = active;
-  $('statUsed').textContent = used;
-  $('statExpired').textContent = expired;
-
-  // Lọc
-  let filtered = codes.slice().reverse();
-  if(searchQ){
-    filtered = filtered.filter(c => c.code.includes(searchQ));
-  }
-  if(filter !== 'all'){
-    filtered = filtered.filter(c => getStatus(c) === filter);
-  }
-
-  // Render
-  list.replaceChildren();
-
-  if(filtered.length === 0){
-    list.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">📭</div>
-        <div>${codes.length === 0 ? 'Chưa có code nào. Nhấn "TẠO CODE" để bắt đầu.' : 'Không có code nào khớp bộ lọc.'}</div>
-      </div>`;
-    return;
-  }
-
-  filtered.forEach(item => {
-    const st = getStatus(item);
-    const div = document.createElement('div');
-    div.className = 'code-item ' + (st === 'used' ? 'used' : st === 'expired' ? 'expired' : '');
-
-    const badgeText = st === 'active' ? 'Chưa dùng' : st === 'used' ? 'Đã dùng' : 'Hết hạn';
-    const badgeClass = 'badge-' + st;
-
-    div.innerHTML = `
-      <div class="code-value">${item.code}</div>
-      <div class="code-info">
-        <b>+${formatNumber(item.bonus)} lượt</b>
-        <span>Hết hạn: ${formatDate(item.expiresAt)}</span>
-        ${item.note ? '<span>📝 ' + item.note + '</span>' : ''}
-        <span class="code-badge ${badgeClass}">${badgeText}</span>
-      </div>
-      <div class="code-actions">
-        <button class="copy-one" title="Copy code">📋</button>
-        <button class="del" title="Xoá code">🗑</button>
-      </div>
-    `;
-
-    div.querySelector('.copy-one').addEventListener('click', (e) => {
-      e.stopPropagation();
-      navigator.clipboard.writeText(item.code).then(() => {
-        showToast('✅ Đã copy: ' + item.code, 'success');
-      });
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: 'Bạn là HZX AI, trợ lý thông minh, trả lời bằng tiếng Việt, ngắn gọn và chính xác.' },
+          ...conversationHistory
+        ]
+      })
     });
 
-    div.querySelector('.del').addEventListener('click', (e) => {
-      e.stopPropagation();
-      if(confirm('Xoá code ' + item.code + '?')){
-        const codes2 = getCodes().filter(c => c.id !== item.id);
-        saveCodes(codes2);
-        renderCodes();
-        showToast('🗑 Đã xoá code', 'success');
-      }
-    });
+    const rawText = await response.text();
+    let data;
+    try { data = JSON.parse(rawText); } catch(e) { data = null; }
 
-    list.appendChild(div);
-  });
+    if (!response.ok) {
+      typingEl.remove();
+      addMessage(`❌ Lỗi ${response.status}: ${rawText.substring(0, 300)}`, 'bot');
+      sendBtn.disabled = false;
+      return;
+    }
+
+    let botReply = 'Xin lỗi, tôi không thể trả lời lúc này.';
+    if (data && data.result && data.result.response) {
+      botReply = data.result.response;
+    } else if (data && data.response) {
+      botReply = data.response;
+    } else if (data && data.result && typeof data.result === 'string') {
+      botReply = data.result;
+    } else if (data && data.errors) {
+      botReply = '❌ Lỗi API: ' + JSON.stringify(data.errors);
+    }
+
+    typingEl.remove();
+    addMessage(botReply, 'bot');
+    conversationHistory.push({ role: 'assistant', content: botReply });
+
+    if (conversationHistory.length > 20) {
+      conversationHistory = conversationHistory.slice(-20);
+    }
+  } catch (err) {
+    typingEl.remove();
+    addMessage('❌ Lỗi kết nối: ' + err.message, 'bot');
+  }
+
+  sendBtn.disabled = false;
+  userInput.focus();
 }
 
-// Tạo code
-$('createBtn').addEventListener('click', () => {
-  const prefix = $('prefix').value.trim();
-  const length = parseInt($('length').value, 10);
-  const bonus = parseInt($('bonus').value, 10);
-  const quantity = parseInt($('quantity').value, 10);
-  const expireDays = parseInt($('expire').value, 10);
-  const note = $('note').value.trim();
+// ================= HIỂN THỊ TIN NHẮN =================
+function addMessage(text, sender) {
+  const msg = document.createElement('div');
+  msg.className = `message ${sender}`;
 
-  // Validate
-  if(!prefix){
-    showToast('❌ Tiền tố không được rỗng', 'error');
-    return;
-  }
-  if(isNaN(bonus) || bonus < 1000){
-    showToast('❌ Số lượt tối thiểu 1,000', 'error');
-    return;
-  }
-  if(isNaN(quantity) || quantity < 1 || quantity > 100){
-    showToast('❌ Số lượng từ 1-100', 'error');
-    return;
-  }
+  const avatar = document.createElement('div');
+  avatar.className = 'msg-avatar';
+  avatar.textContent = sender === 'user' ? '👤' : '🤖';
 
-  const existingCodes = getCodes();
-  const newCodes = [];
+  const content = document.createElement('div');
+  content.className = 'msg-content';
+  content.textContent = text;
 
-  for(let i = 0; i < quantity; i++){
-    const code = generateUniqueCode(prefix, length, existingCodes.concat(newCodes));
-    const expiresAt = expireDays > 0 ? Date.now() + expireDays * 86400000 : 0;
+  msg.appendChild(avatar);
+  msg.appendChild(content);
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
 
-    newCodes.push({
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8) + i,
-      code: code,
-      bonus: bonus,
-      note: note,
-      used: false,
-      usedBy: '',
-      usedAt: 0,
-      expiresAt: expiresAt,
-      createdAt: Date.now()
-    });
-  }
+function addTyping() {
+  const msg = document.createElement('div');
+  msg.className = 'message bot';
+  msg.innerHTML = `
+    <div class="msg-avatar">🤖</div>
+    <div class="typing"><span></span><span></span><span></span></div>
+  `;
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  return msg;
+}
 
-  const all = existingCodes.concat(newCodes);
-  saveCodes(all);
-  renderCodes();
+function quickSend(text) {
+  userInput.value = text;
+  sendMessage();
+}
 
-  // Hiện kết quả
-  const resultBox = $('resultBox');
-  const resultCode = $('resultCode');
-  if(newCodes.length === 1){
-    resultCode.textContent = newCodes[0].code;
-  }else{
-    resultCode.textContent = newCodes.map(c => c.code).join('\n');
-  }
-  resultBox.classList.add('show');
-  resultBox.scrollIntoView({behavior: 'smooth', block: 'nearest'});
-
-  // Lưu để copy
-  resultBox.dataset.codes = newCodes.map(c => c.code).join('\n');
-
-  showToast('✅ Đã tạo ' + quantity + ' code!', 'success');
-});
-
-// Copy kết quả
-$('copyBtn').addEventListener('click', () => {
-  const codes = $('resultBox').dataset.codes || $('resultCode').textContent;
-  navigator.clipboard.writeText(codes).then(() => {
-    const btn = $('copyBtn');
-    btn.classList.add('copied');
-    btn.textContent = '✅ ĐÃ COPY!';
-    showToast('✅ Đã copy code', 'success');
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.textContent = '📋 COPY TOÀN BỘ';
-    }, 2000);
-  });
-});
-
-// Xoá tất cả
-$('clearBtn').addEventListener('click', () => {
-  const codes = getCodes();
-  if(codes.length === 0){
-    showToast('Không có code để xoá', 'error');
-    return;
-  }
-  if(confirm('Xoá TẤT CẢ ' + codes.length + ' code? Không hoàn tác được!')){
-    saveCodes([]);
-    renderCodes();
-    $('resultBox').classList.remove('show');
-    showToast('🗑 Đã xoá tất cả code', 'success');
+userInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
   }
 });
 
-// Search + filter
-$('searchCode')?.addEventListener('input', renderCodes);
-$('filterStatus')?.addEventListener('change', renderCodes);
-
-// Khởi tạo
-renderCodes();
-console.log('🔑 NCB Admin Panel - Bypass By nhatanh Dev');
-console.log('👤 Admin: NGUYỄN CÔNG BẰNG');
-console.log('💾 Codes lưu trong localStorage key:', STORAGE_KEY);
+userInput.focus();
 </script>
-
 </body>
 </html>
