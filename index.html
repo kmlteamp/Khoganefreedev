@@ -158,7 +158,7 @@
     <div class="avatar">H</div>
     <div class="header-info">
       <h1>HZX AI</h1>
-      <p><span class="status-dot"></span>Đang hoạt động</p>
+      <p><span class="status-dot"></span>gemini-3.8-flash</p>
     </div>
   </div>
 
@@ -182,10 +182,10 @@
 </div>
 
 <script>
-// ================= CẤU HÌNH GEMINI =================
+// ================= CẤU HÌNH =================
 const GEMINI_KEY = 'AQ.Ab8RN6Lu_xzzIu_kYx_U7yk69hpZ6PMF7p8wA6S5t7uaKc9h5A';
-const MODEL = 'gemini-2.0-flash';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_KEY}`;
+const MODEL = 'gemini-3.8-flash';
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 let conversationHistory = [];
 
@@ -204,7 +204,6 @@ async function sendMessage() {
   userInput.value = '';
   sendBtn.disabled = true;
 
-  // Thêm vào lịch sử dạng Gemini
   conversationHistory.push({
     role: 'user',
     parts: [{ text: text }]
@@ -215,14 +214,19 @@ async function sendMessage() {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': GEMINI_KEY
+      },
       body: JSON.stringify({
         systemInstruction: {
           parts: [{ text: 'Bạn là HZX AI, trợ lý thông minh, trả lời bằng tiếng Việt, ngắn gọn và chính xác.' }]
         },
         contents: conversationHistory,
         generationConfig: {
-          temperature: 0.9,
+          thinkingConfig: {
+            thinkingLevel: 'medium'
+          },
           maxOutputTokens: 2048
         }
       })
@@ -235,7 +239,7 @@ async function sendMessage() {
     typingEl.remove();
 
     if (!response.ok) {
-      addMessage(`❌ Lỗi ${response.status}: ${rawText.substring(0, 400)}`, 'bot');
+      addMessage(`❌ Lỗi ${response.status}: ${rawText.substring(0, 500)}`, 'bot');
       sendBtn.disabled = false;
       return;
     }
@@ -255,7 +259,6 @@ async function sendMessage() {
       parts: [{ text: botReply }]
     });
 
-    // Giới hạn lịch sử 20 lượt (40 entries)
     if (conversationHistory.length > 40) {
       conversationHistory = conversationHistory.slice(-40);
     }
