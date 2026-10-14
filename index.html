@@ -17,96 +17,62 @@
     padding: 20px;
   }
   .chat-container {
-    width: 100%;
-    max-width: 800px;
-    height: 90vh;
+    width: 100%; max-width: 800px; height: 90vh;
     background: rgba(20, 20, 35, 0.95);
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    display: flex; flex-direction: column; overflow: hidden;
     border: 1px solid rgba(120, 100, 255, 0.3);
   }
   .chat-header {
     background: linear-gradient(90deg, #6a11cb, #2575fc);
     padding: 20px 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 4px 20px rgba(106, 17, 203, 0.4);
+    display: flex; align-items: center; gap: 15px;
   }
   .avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #6a11cb;
+    width: 45px; height: 45px; border-radius: 50%;
+    background: #fff; display: flex;
+    align-items: center; justify-content: center;
+    font-size: 24px; font-weight: bold; color: #6a11cb;
   }
-  .header-info h1 { font-size: 20px; font-weight: bold; }
+  .header-info h1 { font-size: 20px; }
   .header-info p { font-size: 13px; opacity: 0.85; margin-top: 2px; }
   .status-dot {
-    width: 10px; height: 10px;
-    background: #00ff88;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
-    animation: pulse 2s infinite;
+    width: 10px; height: 10px; background: #00ff88;
+    border-radius: 50%; display: inline-block;
+    margin-right: 6px; animation: pulse 2s infinite;
   }
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
   }
   .chat-body {
-    flex: 1;
-    padding: 25px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex: 1; padding: 25px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 15px;
   }
   .chat-body::-webkit-scrollbar { width: 6px; }
   .chat-body::-webkit-scrollbar-thumb {
-    background: rgba(120, 100, 255, 0.5);
-    border-radius: 3px;
+    background: rgba(120, 100, 255, 0.5); border-radius: 3px;
   }
   .message {
-    display: flex;
-    gap: 10px;
-    max-width: 80%;
+    display: flex; gap: 10px; max-width: 80%;
     animation: fadeIn 0.3s ease;
   }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  .message.user {
-    align-self: flex-end;
-    flex-direction: row-reverse;
-  }
+  .message.user { align-self: flex-end; flex-direction: row-reverse; }
   .msg-avatar {
-    width: 35px; height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
+    width: 35px; height: 35px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
   }
   .message.bot .msg-avatar { background: linear-gradient(135deg, #6a11cb, #2575fc); }
   .message.user .msg-avatar { background: linear-gradient(135deg, #f093fb, #f5576c); }
   .msg-content {
-    padding: 12px 18px;
-    border-radius: 18px;
-    font-size: 15px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    white-space: pre-wrap;
+    padding: 12px 18px; border-radius: 18px;
+    font-size: 15px; line-height: 1.5;
+    word-wrap: break-word; white-space: pre-wrap;
   }
   .message.bot .msg-content {
     background: rgba(106, 17, 203, 0.25);
@@ -119,18 +85,14 @@
     border-top-right-radius: 4px;
   }
   .typing {
-    display: flex; gap: 5px;
-    padding: 12px 18px;
+    display: flex; gap: 5px; padding: 12px 18px;
     background: rgba(106, 17, 203, 0.25);
-    border-radius: 18px;
-    border-top-left-radius: 4px;
+    border-radius: 18px; border-top-left-radius: 4px;
     width: fit-content;
   }
   .typing span {
-    width: 8px; height: 8px;
-    background: #fff;
-    border-radius: 50%;
-    animation: bounce 1.4s infinite;
+    width: 8px; height: 8px; background: #fff;
+    border-radius: 50%; animation: bounce 1.4s infinite;
   }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
   .typing span:nth-child(3) { animation-delay: 0.4s; }
@@ -139,23 +101,15 @@
     30% { transform: translateY(-8px); opacity: 1; }
   }
   .chat-footer {
-    padding: 20px;
-    background: rgba(15, 12, 41, 0.8);
+    padding: 20px; background: rgba(15, 12, 41, 0.8);
     border-top: 1px solid rgba(120, 100, 255, 0.2);
-    display: flex;
-    gap: 12px;
-    align-items: center;
+    display: flex; gap: 12px; align-items: center;
   }
   .chat-footer input {
-    flex: 1;
-    padding: 14px 20px;
-    border-radius: 30px;
+    flex: 1; padding: 14px 20px; border-radius: 30px;
     border: 1px solid rgba(120, 100, 255, 0.4);
     background: rgba(30, 25, 60, 0.8);
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: 0.3s;
+    color: #fff; font-size: 15px; outline: none;
   }
   .chat-footer input:focus {
     border-color: #6a11cb;
@@ -163,24 +117,18 @@
   }
   .chat-footer input::placeholder { color: #8899aa; }
   .send-btn {
-    width: 50px; height: 50px;
-    border-radius: 50%;
+    width: 50px; height: 50px; border-radius: 50%;
     border: none;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+    color: #fff; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
     transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .send-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(106, 17, 203, 0.7); }
-  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .send-btn:hover { transform: scale(1.1); }
+  .send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .welcome { text-align: center; padding: 40px 20px; opacity: 0.7; }
   .welcome h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 24px; margin-bottom: 10px;
     background: linear-gradient(90deg, #6a11cb, #2575fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -194,12 +142,9 @@
     padding: 8px 16px;
     background: rgba(106, 17, 203, 0.2);
     border: 1px solid rgba(106, 17, 203, 0.5);
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: 0.3s;
+    border-radius: 20px; font-size: 13px; cursor: pointer;
   }
-  .suggestion:hover { background: rgba(106, 17, 203, 0.5); transform: translateY(-2px); }
+  .suggestion:hover { background: rgba(106, 17, 203, 0.5); }
   @media (max-width: 600px) {
     body { padding: 0; }
     .chat-container { height: 100vh; border-radius: 0; max-width: 100%; }
@@ -237,11 +182,10 @@
 </div>
 
 <script>
-// ================= CẤU HÌNH =================
-const ACCOUNT_ID = '67b54121c64cc574ac984da1fd117cbf';
-const API_KEY = 'cfut_FVXXpO6mvT6ObBUwOYy8riTXlH9mspyOkoCQrirh3d96f215';
-const MODEL = '@cf/meta/llama-3-8b-instruct';
-const API_URL = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/ai/run/${MODEL}`;
+// ================= CẤU HÌNH GEMINI =================
+const GEMINI_KEY = 'AQ.Ab8RN6Lu_xzzIu_kYx_U7yk69hpZ6PMF7p8wA6S5t7uaKc9h5A';
+const MODEL = 'gemini-2.0-flash';
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_KEY}`;
 
 let conversationHistory = [];
 
@@ -249,7 +193,6 @@ const chatBody = document.getElementById('chatBody');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
-// ================= GỬI TIN NHẮN =================
 async function sendMessage() {
   const text = userInput.value.trim();
   if (!text) return;
@@ -261,22 +204,27 @@ async function sendMessage() {
   userInput.value = '';
   sendBtn.disabled = true;
 
-  conversationHistory.push({ role: 'user', content: text });
+  // Thêm vào lịch sử dạng Gemini
+  conversationHistory.push({
+    role: 'user',
+    parts: [{ text: text }]
+  });
 
   const typingEl = addTyping();
 
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${API_KEY}`,
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        messages: [
-          { role: 'system', content: 'Bạn là HZX AI, trợ lý thông minh, trả lời bằng tiếng Việt, ngắn gọn và chính xác.' },
-          ...conversationHistory
-        ]
+        systemInstruction: {
+          parts: [{ text: 'Bạn là HZX AI, trợ lý thông minh, trả lời bằng tiếng Việt, ngắn gọn và chính xác.' }]
+        },
+        contents: conversationHistory,
+        generationConfig: {
+          temperature: 0.9,
+          maxOutputTokens: 2048
+        }
       })
     });
 
@@ -284,30 +232,32 @@ async function sendMessage() {
     let data;
     try { data = JSON.parse(rawText); } catch(e) { data = null; }
 
+    typingEl.remove();
+
     if (!response.ok) {
-      typingEl.remove();
-      addMessage(`❌ Lỗi ${response.status}: ${rawText.substring(0, 300)}`, 'bot');
+      addMessage(`❌ Lỗi ${response.status}: ${rawText.substring(0, 400)}`, 'bot');
       sendBtn.disabled = false;
       return;
     }
 
     let botReply = 'Xin lỗi, tôi không thể trả lời lúc này.';
-    if (data && data.result && data.result.response) {
-      botReply = data.result.response;
-    } else if (data && data.response) {
-      botReply = data.response;
-    } else if (data && data.result && typeof data.result === 'string') {
-      botReply = data.result;
-    } else if (data && data.errors) {
-      botReply = '❌ Lỗi API: ' + JSON.stringify(data.errors);
+    if (data && data.candidates && data.candidates[0] && data.candidates[0].content
+        && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
+      botReply = data.candidates[0].content.parts[0].text;
+    } else if (data && data.error) {
+      botReply = '❌ ' + (data.error.message || JSON.stringify(data.error));
     }
 
-    typingEl.remove();
     addMessage(botReply, 'bot');
-    conversationHistory.push({ role: 'assistant', content: botReply });
 
-    if (conversationHistory.length > 20) {
-      conversationHistory = conversationHistory.slice(-20);
+    conversationHistory.push({
+      role: 'model',
+      parts: [{ text: botReply }]
+    });
+
+    // Giới hạn lịch sử 20 lượt (40 entries)
+    if (conversationHistory.length > 40) {
+      conversationHistory = conversationHistory.slice(-40);
     }
   } catch (err) {
     typingEl.remove();
@@ -318,7 +268,6 @@ async function sendMessage() {
   userInput.focus();
 }
 
-// ================= HIỂN THỊ TIN NHẮN =================
 function addMessage(text, sender) {
   const msg = document.createElement('div');
   msg.className = `message ${sender}`;
